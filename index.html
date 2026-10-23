@@ -1,0 +1,514 @@
+<!doctype html><html lang="pl"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta http-equiv="refresh" content="60"><meta name="robots" content="noindex">
+<meta name="apple-mobile-web-app-capable" content="yes"><meta name="theme-color" content="#0f172a">
+<title>AutoTrader</title><style>
+:root{--bg:#f6f7f9;--card:#fff;--fg:#111827;--mut:#6b7280;--line:#e5e7eb;--ok:#047857;--okbg:#d1fae5;--bad:#b91c1c;--badbg:#fee2e2;--t:#059669;--s:#dc2626;--n:#9ca3af}
+@media (prefers-color-scheme:dark){:root{--bg:#0b1220;--card:#131c2e;--fg:#e5e7eb;--mut:#94a3b8;--line:#1f2a40;--ok:#6ee7b7;--okbg:#064e3b;--bad:#fca5a5;--badbg:#7f1d1d;--t:#34d399;--s:#f87171;--n:#64748b}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.45 -apple-system,system-ui,Segoe UI,Roboto,sans-serif;padding:16px;max-width:720px;margin:auto}
+h1{margin:0 0 6px;font-size:24px}h2{margin:0;font-size:20px}h3{font-size:14px;margin:14px 0 6px;color:var(--mut);text-transform:uppercase;letter-spacing:.04em}h4{margin:10px 0 4px;font-size:13px}
+.top{margin-bottom:12px}.sub{color:var(--mut);margin:6px 0;font-size:14px}.note{color:var(--mut);font-size:14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;margin:12px 0}
+.card>header{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+.badge,.pill{font-size:12px;font-weight:600;padding:4px 10px;border-radius:999px;display:inline-block}
+.ok{background:var(--okbg);color:var(--ok)}.bad{background:var(--badbg);color:var(--bad)}.muted{background:var(--line);color:var(--mut)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}.grid div{background:var(--bg);border-radius:10px;padding:10px}
+.grid span{display:block;font-size:12px;color:var(--mut)}.grid b{font-size:18px}.pos{color:var(--t)}.neg{color:var(--s)}
+.bar{display:flex;height:12px;border-radius:6px;overflow:hidden;background:var(--line)}.bar i{display:block}
+.t{background:var(--t)}.s{background:var(--s)}.n{background:var(--n)}
+.legend{font-size:13px;color:var(--mut)}.dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin:0 3px 0 6px}
+.verdict{font-size:14px;border-left:3px solid var(--line);padding-left:10px}
+.ticket{background:var(--bg);border-radius:10px;padding:10px}.risk{border-radius:10px;padding:10px;font-size:14px}
+.news{padding-left:18px;margin:6px 0}.news li{margin:6px 0}.news a{color:inherit}.news small{display:block;color:var(--mut)}
+details{margin-top:12px}summary{cursor:pointer;color:var(--mut);font-size:14px}
+pre{white-space:pre-wrap;word-break:break-word;font-size:12px;background:var(--bg);padding:10px;border-radius:8px;overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:14px;margin-top:8px}td,th{text-align:left;padding:6px 4px;border-bottom:1px solid var(--line)}
+a.btn{display:block;text-align:center;margin-top:12px;padding:12px;border-radius:10px;background:var(--t);color:#fff;font-weight:600;text-decoration:none}
+a.btn.ghost{background:transparent;color:var(--s);border:1px solid var(--s)}
+footer{color:var(--mut);font-size:12px;margin:20px 0 40px}
+</style></head><body><header class="top"><h1>AutoTrader</h1><span class="pill muted">Giełda zamknięta · otwarcie 2026-11-02 09:30 NY</span><p class="sub">Ostatnia aktualizacja: 2026-10-30 19:09 czasu NY (<span id="pl"></span> w Polsce) · odświeża się co minutę</p></header><p class="note">Poza sesją nic nie jest skanowane. Poniżej wynik ostatniego przebiegu.</p><section class="card"><header><h2>Automat</h2><span class="badge ok">WŁĄCZONY · PAPER</span></header><p class="sub">Gdy kontrola ryzyka da PASS, serwer sam składa zlecenie ze stopem i celem (max 1 dziennie), a o 15:40 NY sam zamyka otwarte pozycje.</p><ul class="news"><li>14:28 NY: WMT: WYSLANO na konto PAPER: kupno 6 akcji, market, stop 123.34, cel 125.26, max strata ok. $3.84. Status w Alpaca: pending_new.</li></ul></section><section class="card"><header><h2>Dziennik wyników</h2><span class="badge muted">od 2026-10-23</span></header><div class="grid"><div><span>Transakcje</span><b>2</b></div><div><span>Trafione (zysk)</span><b>0 z 2 · 0%</b></div><div><span>Wynik łączny</span><b class="neg">−$5.37</b></div><div><span>Średnio na transakcję</span><b>-1.14 R</b></div></div><p class="sub">Cel 0 · stop 2 · zamknięte przed końcem 0 · otwarte 3. R = wynik w jednostkach ryzyka (+1 R = zysk równy zaplanowanej stracie). Ceny z historii wykonania w Alpaca.</p><p class="sub">Za mało transakcji na ocenę: potrzeba kilkudziesięciu (jest 2).</p><table><tr><th>Dzień</th><th>Spółka</th><th>Wejście → wyjście</th><th>Wynik</th></tr><tr><td>10-30</td><td>WMT<br><small>stop</small></td><td>$123.96 → $123.32</td><td class="neg">−$3.84<br><small>-1.03 R</small></td></tr><tr><td>10-29</td><td>LNG<br><small>otwarta</small></td><td>$317.23 → …</td><td>otwarta</td></tr><tr><td>10-28</td><td>IREN<br><small>otwarta</small></td><td>$28.32 → …</td><td>otwarta</td></tr><tr><td>10-27</td><td>LRCX<br><small>otwarta</small></td><td>$240.43 → …</td><td>otwarta</td></tr><tr><td>10-26</td><td>BA<br><small>stop</small></td><td>$188.58 → $188.07</td><td class="neg">−$1.53<br><small>-1.24 R</small></td></tr></table></section><section class="card"><header><h2>Konto Alpaca</h2><span class="badge muted">PAPER</span></header><div class="grid"><div><span>Kapitał</span><b>$99,908.48</b></div><div><span>Dziś</span><b class="neg">−$81.28</b></div><div><span>Gotówka</span><b>$97,902.37</b></div><div><span>Pozycje</span><b>3</b></div></div><table><tr><th>Spółka</th><th>Akcje</th><th>Śr. cena</th><th>Wynik</th></tr><tr><td>IREN</td><td>26</td><td>$28.32</td><td class="neg">$-108.80</td></tr><tr><td>LNG</td><td>2</td><td>$317.23</td><td class="pos">$25.54</td></tr><tr><td>LRCX</td><td>3</td><td>$240.43</td><td class="neg">$-2.83</td></tr></table><a class="btn ghost" href="https://github.com/ricken89/autotrader/actions/workflows/zamknij.yml" target="_blank" rel="noopener">Zamknij pozycję</a></section><section class="card"><h2>Skaner</h2><p class="sub">39 wykresów przebiło zakres otwarcia (sprawdzono 864 z 5944, dane 2026-10-30 14:28 ET). Spełnienie reguły to nie rekomendacja kupna.</p><details><summary>Pokaż listę</summary><table><tr><th>Spółka</th><th>Wybicie</th><th>Cena</th><th>Nad</th></tr><tr><td>ABBV</td><td>9:50 AM</td><td>$297.06</td><td>0.11%</td></tr><tr><td>AMZN</td><td>9:50 AM</td><td>$239.21</td><td>0.34%</td></tr><tr><td>NVT</td><td>9:50 AM</td><td>$134.51</td><td>0.18%</td></tr><tr><td>ORCL</td><td>9:50 AM</td><td>$134.65</td><td>0.05%</td></tr><tr><td>PSX</td><td>9:50 AM</td><td>$283.51</td><td>0.41%</td></tr><tr><td>TWLO</td><td>9:50 AM</td><td>$195.88</td><td>1.65%</td></tr><tr><td>VLO</td><td>9:50 AM</td><td>$397.95</td><td>0.51%</td></tr><tr><td>BE</td><td>9:55 AM</td><td>$214.67</td><td>0.41%</td></tr><tr><td>DASH</td><td>9:55 AM</td><td>$183.09</td><td>0.05%</td></tr><tr><td>ETN</td><td>9:55 AM</td><td>$381.93</td><td>0.23%</td></tr><tr><td>FTNT</td><td>9:55 AM</td><td>$138.37</td><td>0.47%</td></tr><tr><td>GEV</td><td>9:55 AM</td><td>$884.68</td><td>0.75%</td></tr><tr><td>LNG</td><td>9:55 AM</td><td>$328.18</td><td>0.24%</td></tr><tr><td>MPWR</td><td>9:55 AM</td><td>$1,250.85</td><td>0.03%</td></tr><tr><td>MU</td><td>9:55 AM</td><td>$902.11</td><td>0.28%</td></tr><tr><td>TSLA</td><td>9:55 AM</td><td>$394.12</td><td>0.17%</td></tr><tr><td>VST</td><td>9:55 AM</td><td>$139.60</td><td>0.09%</td></tr><tr><td>XOM</td><td>9:55 AM</td><td>$188.10</td><td>0.09%</td></tr><tr><td>AZN</td><td>10:00 AM</td><td>$187.07</td><td>0.04%</td></tr><tr><td>DE</td><td>10:00 AM</td><td>$664.62</td><td>0.1%</td></tr><tr><td>INTU</td><td>10:00 AM</td><td>$343.34</td><td>0.58%</td></tr><tr><td>META</td><td>10:00 AM</td><td>$620.16</td><td>0.14%</td></tr><tr><td>WDC</td><td>10:00 AM</td><td>$376.92</td><td>0.24%</td></tr><tr><td>ARM</td><td>10:05 AM</td><td>$208.78</td><td>0.15%</td></tr><tr><td>BA</td><td>10:05 AM</td><td>$173.05</td><td>0.03%</td></tr><tr><td>IREN</td><td>10:05 AM</td><td>$24.82</td><td>0.58%</td></tr><tr><td>GM</td><td>10:10 AM</td><td>$85.82</td><td>0.1%</td></tr><tr><td>NEE</td><td>10:25 AM</td><td>$83.56</td><td>0.11%</td></tr><tr><td>ROP</td><td>10:30 AM</td><td>$465.05</td><td>0.01%</td></tr><tr><td>HPQ</td><td>10:40 AM</td><td>$29.27</td><td>0.43%</td></tr><tr><td>AAPL</td><td>10:45 AM</td><td>$348.82</td><td>0.01%</td></tr><tr><td>BMNR</td><td>10:50 AM</td><td>$20.56</td><td>0.71%</td></tr><tr><td>PEP</td><td>11:05 AM</td><td>$137.60</td><td>0.05%</td></tr><tr><td>GOOG</td><td>11:10 AM</td><td>$280.87</td><td>0.1%</td></tr><tr><td>MELI</td><td>11:10 AM</td><td>$1,641.77</td><td>0.11%</td></tr><tr><td>MSTR</td><td>11:10 AM</td><td>$132.50</td><td>0.72%</td></tr><tr><td>ACN</td><td>11:30 AM</td><td>$256.03</td><td>0.04%</td></tr><tr><td>GPN</td><td>12:00 PM</td><td>$87.06</td><td>0.06%</td></tr><tr><td>WMT</td><td>12:15 PM</td><td>$123.98</td><td>0.04%</td></tr></table></details></section><p class="note">Najświeższe wybicia przeszły cały łańcuch skilli. Decyzja o zleceniu należy do Ciebie.</p><article class="card"><header><h2>WMT</h2><span class="badge ok">ZŁOŻONE AUTOMATYCZNIE</span></header><p class="sub">Sygnał 12:15 PM po $123.98 · poziom $123.93</p><div class="grid"><div><span>Wejście</span><b>$123.98</b></div><div><span>Stop</span><b class="neg">$123.34</b></div><div><span>Cel (2.0R)</span><b class="pos">$125.26</b></div><div><span>Ryzyko / akcję</span><b>$0.64</b></div></div><h3>Symulacja: 10 000 powtórek dnia</h3><div class="bar"><i class="t" style="width:7.3%"></i><i class="s" style="width:29.7%"></i><i class="n" style="width:63.0%"></i></div><p class="legend"><span class="dot t"></span>cel 7.3% <span class="dot s"></span>stop 29.7% <span class="dot n"></span>żadne 63.0% · seed 19</p><p class="verdict">Leans toward the stop: at 2R the target has to come first in 33 % of the replays that hit one side; it did in 20 % (target first 7.3 % vs stop first 29.7 %).</p><h3>Zlecenie (konto PAPER, nie złożone)</h3><p class="ticket">KUP <b>6</b> WMT, stop 123.34, cel 125.26 · max strata $3.84</p><p class="risk ok">Ryzyko: <b>PASS</b></p><h3>Newsy (24 h)</h3><p class="sub">Kurs $123.97 (+2.24% vs wczoraj)</p><ul class="news"><li><a href="https://finance.yahoo.com/markets/stocks/articles/2-mega-cap-stocks-exciting-175529133.html?.tsrc=rss" target="_blank" rel="noopener">2 mega-cap stocks with exciting potential and 1 we avoid</a><small>17:55 UTC</small></li><li><a href="https://finance.yahoo.com/video/amazon-earnings-fall-short-amid-tech-sell-off-and-anthropic-becomes-spacexs-top-partner-174024326.html?.tsrc=rss" target="_blank" rel="noopener">Amazon earnings fall short amid tech sell-off, and Anthropic becomes SpaceX&#x27;s top partner</a><small>17:40 UTC · earnings, people, macro</small></li><li><a href="https://finance.yahoo.com/video/demand-for-ai-intelligence-is-insatiable-but-wheres-the-roi-173810027.html?.tsrc=rss" target="_blank" rel="noopener">Demand for AI intelligence is insatiable, but where’s the ROI?</a><small>17:38 UTC · earnings, people</small></li><li><a href="https://finance.yahoo.com/energy/articles/walmart-power-announce-strategic-agreement-172400495.html?.tsrc=rss" target="_blank" rel="noopener">Walmart and Base Power Announce a Strategic Agreement to Bring Affordable Home Backup Power and Energy Savings to Customers</a><small>17:24 UTC</small></li><li><a href="https://finance.yahoo.com/video/walmart-eli-lilly-join-pushback-163000217.html?.tsrc=rss" target="_blank" rel="noopener">Walmart &amp; Eli Lilly join the pushback against blockchain-based stock trading</a><small>16:30 UTC</small></li></ul><p class="risk ok">Automat: WYSLANO na konto PAPER: kupno 6 akcji, market, stop 123.34, cel 125.26, max strata ok. $3.84. Status w Alpaca: pending_new.</p><details><summary>Pełne wyniki każdego kroku</summary><h4>Newsy</h4><pre>{
+  &quot;checked&quot;: &quot;2026-10-30T18:32:12.745622+00:00&quot;,
+  &quot;moves&quot;: [
+    {
+      &quot;ticker&quot;: &quot;WMT&quot;,
+      &quot;price&quot;: 123.97,
+      &quot;prev_close&quot;: 121.25,
+      &quot;pct&quot;: 2.24,
+      &quot;time&quot;: &quot;2026-10-30T18:28:48+00:00&quot;,
+      &quot;moving&quot;: false
+    }
+  ],
+  &quot;items&quot;: [
+    {
+      &quot;id&quot;: &quot;rss:17cf07ac-15d0-3cce-8a11-b407691404ad&quot;,
+      &quot;source&quot;: &quot;Yahoo Finance&quot;,
+      &quot;kind&quot;: &quot;headline&quot;,
+      &quot;ticker&quot;: &quot;WMT&quot;,
+      &quot;title&quot;: &quot;2 mega-cap stocks with exciting potential and 1 we avoid&quot;,
+      &quot;summary&quot;: &quot;Megacap stocks dominate their sectors and their actions influence economies worldwide. The flip side though is that their sheer size means they have less room for explosive growth as scale works against them.&quot;,
+      &quot;link&quot;: &quot;https://finance.yahoo.com/markets/stocks/articles/2-mega-cap-stocks-exciting-175529133.html?.tsrc=rss&quot;,
+      &quot;time&quot;: &quot;2026-10-30T17:55:29+00:00&quot;,
+      &quot;touches&quot;: [
+        &quot;WMT&quot;
+      ],
+      &quot;tags&quot;: [],
+      &quot;new&quot;: true
+    },
+    {
+      &quot;id&quot;: &quot;rss:472f6851-b77b-4a25-8301-5fb72867c696&quot;,
+      &quot;source&quot;: &quot;Yahoo Finance&quot;,
+      &quot;kind&quot;: &quot;headline&quot;,
+      &quot;ticker&quot;: &quot;WMT&quot;,
+      &quot;title&quot;: &quot;Amazon earnings fall short amid tech sell-off, and Anthropic becomes SpaceX&#x27;s top partner&quot;,
+      &quot;summary&quot;: &quot;In this episode of Market Hang, Laffer Tengler Investments CEO and CIO Nancy Tengler and her panel of experts weigh in on the latest round of disappointing earnings from Amazon (AMZN) and Intel (INTC), whether energy earnings feed into the inflation problem, and Anthropic (ANTH.PVT) passing the US government as SpaceX&#x27;s (SPCX) top partner. Today&#x27;s panel includes Futurum CEO Daniel Newman,  SHAKTI Partner Liz Harrow,  Kelly Intelligence Founder, CEO, and CCO  Kevin Kelly,  and &#x27;The Daily Wolf&#x27; Host Scott Melker.&quot;,
+      &quot;link&quot;: &quot;https://finance.yahoo.com/video/amazon-earnings-fall-short-amid-tech-sell-off-and-anthropic-becomes-spacexs-top-partner-174024326.html?.tsrc=rss&quot;,
+      &quot;time&quot;: &quot;2026-10-30T17:40:24+00:00&quot;,
+      &quot;touches&quot;: [
+        &quot;WMT&quot;
+      ],
+      &quot;tags&quot;: [
+        &quot;earnings&quot;,
+        &quot;people&quot;,
+        &quot;macro&quot;
+      ],
+      &quot;new&quot;: true
+    },
+    {
+      &quot;id&quot;: &quot;rss:51aeee57-c19f-4999-b40f-c1a1e27d04c3&quot;,
+      &quot;source&quot;: &quot;Yahoo Finance&quot;,
+      &quot;kind&quot;: &quot;headline&quot;,
+      &quot;ticker&quot;: &quot;WMT&quot;,
+      &quot;title&quot;: &quot;Demand for AI intelligence is insatiable, but where\u2019s the ROI?&quot;,
+      &quot;summary&quot;: &quot;Laffer Tengler Investments CEO and CIO Nancy Tengler and her panel of experts weigh in on  the major movement in tech stocks after the latest earnings reports left investors with strong operating results but open questions about capital spending and valuations.Today&#x27;s panel includes Futurum CEO Daniel Newman, SHAKTI Partner Liz Harrow, and Kelly Intelligence founder, CEO, and CCO Kevin Kelly.&quot;,
+      &quot;link&quot;: &quot;https://finance.yahoo.com/video/demand-for-ai-intelligence-is-insatiable-but-wheres-the-roi-173810027.html?.tsrc=rss&quot;,
+      &quot;time&quot;: &quot;2026-10-30T17:38:10+00:00&quot;,
+      &quot;touches&quot;: [
+        &quot;WMT&quot;
+      ],
+      &quot;tags&quot;: [
+        &quot;earnings&quot;,
+        &quot;people&quot;
+      ],
+      &quot;new&quot;: true
+    },
+    {
+      &quot;id&quot;: &quot;rss:a31178c5-07fd-3d3d-a5da-95c8f8755757&quot;,
+      &quot;source&quot;: &quot;Yahoo Finance&quot;,
+      &quot;kind&quot;: &quot;headline&quot;,
+      &quot;ticker&quot;: &quot;WMT&quot;,
+      &quot;title&quot;: &quot;Walmart and Base Power Announce a Strategic Agreement to Bring Affordable Home Backup Power and Energy Savings to Customers&quot;,
+      &quot;summary&quot;: &quot;BENTONVILLE, Ark., October 30, 2026--Walmart today announced a strategic investment in Base Power, a Texas-based energy company, along with an agreement that will make Base\u2019s home energy offerings available to Walmart customers and Sam\u2019s Club members \u2013 expanding access to affordable energy solutions that can benefit both households and the grid. Base\u2019s home battery systems are designed to help lower energy costs when the grid is on and provide backup power when it\u2019s not.&quot;,
+      &quot;link&quot;: &quot;https://finance.yahoo.com/energy/articles/walmart-power-announce-strategic-agreement-172400495.html?.tsrc=rss&quot;,
+      &quot;time&quot;: &quot;2026-10-30T17:24:00+00:00&quot;,
+      &quot;touches&quot;: [
+        &quot;WMT&quot;
+      ],
+      &quot;tags&quot;: [],
+      &quot;new&quot;: true
+    },
+    {
+      &quot;id&quot;: &quot;rss:4ec05fec-8926-451b-93ae-61fd16f92aa1&quot;,
+      &quot;source&quot;: &quot;Yahoo Finance&quot;,
+      &quot;kind&quot;: &quot;headline&quot;,
+      &quot;ticker&quot;: &quot;WMT&quot;,
+      &quot;title&quot;: &quot;Walmart &amp; Eli Lilly join the pushback against blockchain-based stock trading&quot;,
+      &quot;summary&quot;: &quot;As tokenized stock trading continues to gain traction, so too does the list of companies that object to it. In the video above, Scott Melker outlines key details of the objections from Walmart (WMT), Eli Lilly (LLY), and others.&quot;,
+      &quot;link&quot;: &quot;https://finance.yahoo.com/video/walmart-eli-lilly-join-pushback-163000217.html?.tsrc=rss&quot;,
+      &quot;time&quot;: &quot;2026-10-30T16:30:00+00:00&quot;,
+      &quot;touches&quot;: [
+        &quot;WMT&quot;
+      ],
+      &quot;tags&quot;: [],
+      &quot;new&quot;: true
+    },
+    {
+      &quot;id&quot;: &quot;rss:cc685f09-4c35-3404-98d5-a472907a4d07&quot;,
+      &quot;source&quot;: &quot;Yahoo Finance&quot;,
+      &quot;kind&quot;: &quot;headline&quot;,
+      &quot;ticker&quot;: &quot;WMT&quot;,
+      &quot;title&quot;: &quot;The Lip Bar Says It Aims To Reach More Customers At Target Beyond Its Millennial Black Women Base&quot;,
+      &quot;summary&quot;: &quot;The Lip Bar is embracing inclusivity in its business model beyond millennial Black women.&quot;,
+      &quot;link&quot;: &quot;https://finance.yahoo.com/small-business/articles/lip-bar-says-aims-reach-160503495.html?.tsrc=rss&quot;,
+      &quot;time&quot;: &quot;2026-10-30T16:05:03+00:00&quot;,
+      &quot;touches&quot;: [
+        &quot;WMT&quot;
+      ],
+      &quot;tags&quot;: [],
+      &quot;new&quot;: true
+    },
+    {
+      &quot;id&quot;: &quot;rss:acb89f91-2c9a-4209-ac01-fb4ce6ccb97c&quot;,
+      &quot;source&quot;: &quot;Yahoo Finance&quot;,
+      &quot;kind&quot;: &quot;headline&quot;,
+      &quot;ticker&quot;: &quot;WMT&quot;,
+      &quot;title&quot;: &quot;Binance hacked, and withdrawals are now on hold, plus Nasdaq wants tokenization on its own terms&quot;,
+      &quot;summary&quot;: &quot;Scott Melker unpacks the biggest headlines in cryptocurrency, including the Binance hack, the largest in crypto history. Also, Walmart (WMT) and Eli Lilly (LLY) join the pushback against tokenized stock plans, while Nasdaq wants tokenization on its own terms, directly competing with it</pre><h4>Wejscie</h4><pre>WMT  Fri 2026-10-30 14:32 ET  opening-range breakout (15-minute range) on 5-minute bars (Yahoo, free, can lag), data to 14:28:48
+Opening range 9:30-9:45: high $123.93, low $122.75 (3 of 3 bars).
+TRIGGERED 12:15 PM at $123.98: the 12:10 bar (bar 32) closed above the range high $123.93 (+0.04%).
+That was 137 minutes ago; the last close is $123.96 (14:25 bar). A late entry is a different trade: the price, the stop distance and the odds have moved.
+Nothing was placed.
+Next: set the stop and target BEFORE you buy: /trader-exit (exit.py plan --from trader/entry.json).
+Wrote trader/entry.json (status triggered).</pre><h4>Stop i cel</h4><pre>Exit plan: WMT long, Fri 2026-10-30, opening-range breakout on 5-minute bars
+  Entry         $123.98 at 12:15 PM (bar 32)
+  Stop          $123.34  opening-range midpoint: ($123.93 + $122.75) / 2 = $123.34
+  Target        $125.26  2R (two times the risk)
+  Risk a share  $0.64 (0.52% of the entry)
+  Reward:risk   2.0
+  Flat by       15:55 ET, win or lose: no overnight hold
+Set before the entry. If price hits the stop, you are out; never move it further away.
+A stop is a plan, not a guarantee: a gap or a fast market can fill past it.
+Wrote trader/plan.json.
+Next: /trader-timemachine replays it, then /trader-budget sizes it to your max loss. Nothing was placed.</pre><h4>Wehikul czasu</h4><pre>WMT buy, Friday 2026-10-30: entry 123.98 at 12:15 PM (bar 32), stop 123.34, target 125.26 (2R, risk 0.64 a share).
+10,000 replays of the rest of the session, 12:15 PM to 3:55 PM (44 five-minute bars), seed 19.
+Each bar is drawn whole from WMT&#x27;s own 5-min bars at the same time of day (+-2 bars) over its last 59 full sessions (2026-08-07 to 2026-10-29).
+
+  target first   7.3 %
+  stop first     29.7 %
+  neither        63.0 %   still open at 3:55 PM
+  green          52.7 %   target first, or above the entry at 3:55 PM
+
+  Price at 3:55 PM: median 124.06, 90 % of replays between 122.96 and 125.14.
+  Average R: +0.116 (R = the 0.64 risk: +2R at the target, -1R at the stop).
+
+History: the same rule (15-min opening range, stop at the opening-range midpoint, 2R target) on each of those 59 real sessions fired 33 times: 5 target, 11 stop, 17 neither. Average R +0.258.
+
+Leans toward the stop: at 2R the target has to come first in 33 % of the replays that hit one side; it did in 20 % (target first 7.3 % vs stop first 29.7 %).
+63.0 % of the replays hit neither by 3:55 PM; the price at 3:55 PM decides those.
+Average R is +0.116 all the same: the replays that hit neither pull it the other way.
+
+A simulation built from WMT&#x27;s own last 59 full sessions. It is not a prediction: earnings, news and halts can do things those sessions never did. Same seed, same numbers. Repeat this run with --seed 19.
+Wrote trader/timemachine.json.
+Next: /trader-budget sizes it to your budget and your max loss per trade.</pre><h4>Swieza cena</h4><pre>WMT    $123.97 (+2.24% vs prev close $121.25)  2026-10-30T18:28:48Z  [yahoo]
+Wrote 1 price(s) to trader/prices.json.
+Quotes are free, delayed and unofficial: for alerts only. Your broker&#x27;s price is the one that fills.</pre><h4>Budzet</h4><pre>WMT buy, opening-range breakout, entry 123.98 at 12:15 PM
+Stop 123.34: opening-range midpoint. Target 125.26: 2R (two times the risk).
+Sized at 123.98 (the plan&#x27;s entry). Risk 0.64 a share (entry 123.98 minus stop 123.34). Reward:risk 2.00.
+
+Limits (whole shares; the smallest one wins):
+  max loss      $50 max loss / 0.64 risk a share                            78 shares
+  position cap  75% of $1,000 = $750 / 123.98                                6 shares  &lt;- binds
+  max order     $4,000 / 123.98                                             32 shares
+  cash          budget $1,000 minus the $100 cash buffer = $900 / 123.98     7 shares
+
+Size: 6 shares of WMT = $743.88 at 123.98. Max loss at the stop: 6 x 0.64 = $3.84.
+A stop is an order, not a promise: in a fast market it can fill below 123.34.
+
+Proposed bracket order (place_stock_order arguments, nothing has been placed):
+  buy 6 WMT, market, day, take-profit 125.26, stop-loss 123.34
+Flat by 15:55 New York: anything still open then gets closed (trader-alerts rings, trader-broker flatten).
+
+Next: trader-risk checks it, then trader-broker asks you yes or no.
+Education and tooling, not financial advice.
+Wrote 1 proposed bracket order to trader/orders.json</pre><h4>Ryzyko</h4><pre>PASS  #1 buy WMT 6 shares, entry
+          entry 123.98 (the plan&#x27;s entry), stop 123.34, target 125.26: risk 0.64 a share
+          max loss $3.84 (limit $50), reward:risk 2.00 (min 1)
+          today before this: 0 of 1 trades, $0 of $100 daily loss
+
+1 passed, 0 blocked at 2026-10-30 14:32 New York. Cash after the passed orders: $256.12 (paper account).
+Every order passed. trader-broker still asks you yes or no for each one.
+Education and tooling, not financial advice.</pre><h4>Bilet</h4><pre>ORDER 1 of 1, PAPER account, Alpaca
+  BUY 6 WMT, market, good for today
+  stop-loss 123.34
+  take-profit 125.26
+  max loss about $3.84 if the stop fills at 123.34 (it can fill worse in a fast market)
+  why: opening-range breakout on WMT: 6 shares, bound by your position cap (6 x 0.64 = $3.84 at the stop)
+  READY: trader-risk PASS, waiting for your yes
+  Claude will call place_stock_order with exactly:
+    {
+      &quot;symbol&quot;: &quot;WMT&quot;,
+      &quot;side&quot;: &quot;buy&quot;,
+      &quot;qty&quot;: &quot;6&quot;,
+      &quot;type&quot;: &quot;market&quot;,
+      &quot;time_in_force&quot;: &quot;day&quot;,
+      &quot;order_class&quot;: &quot;bracket&quot;,
+      &quot;take_profit_limit_price&quot;: &quot;125.26&quot;,
+      &quot;stop_loss_stop_price&quot;: &quot;123.34&quot;
+    }
+  Alpaca places the entry, then the stop-loss and the take-profit as two orders
+  that cancel each other: when one fills, the other is canceled.
+  Reply &quot;yes&quot; to place this one order, or &quot;no&quot; to skip it.
+  Claude&#x27;s own card then asks again: Allow once places it, Deny stops it.
+
+One order at a time: a yes covers one ticket, never the batch. Education and tooling, not financial advice.</pre></details></article><article class="card"><header><h2>GPN</h2><span class="badge bad">STOP: Budżet odmówił zlecenia</span></header><p class="sub">Sygnał 12:00 PM po $87.06 · poziom $87.00</p><div class="grid"><div><span>Wejście</span><b>$87.06</b></div><div><span>Stop</span><b class="neg">$86.30</b></div><div><span>Cel (2.0R)</span><b class="pos">$88.58</b></div><div><span>Ryzyko / akcję</span><b>$0.76</b></div></div><h3>Symulacja: 10 000 powtórek dnia</h3><div class="bar"><i class="t" style="width:10.9%"></i><i class="s" style="width:35.5%"></i><i class="n" style="width:53.5%"></i></div><p class="legend"><span class="dot t"></span>cel 10.9% <span class="dot s"></span>stop 35.5% <span class="dot n"></span>żadne 53.5% · seed 19</p><p class="verdict">Leans toward the stop: at 2R the target has to come first in 33 % of the replays that hit one side; it did in 23 % (target first 10.9 % vs stop first 35.5 %).</p><p class="risk bad">Powód: size.py: the target 88.58 is not above the entry 95.16: the move has already happened. Skip it or make a new plan with trader-exit</p><h3>Newsy (24 h)</h3><p class="sub">Kurs $95.28 (+11.15% vs wczoraj) · <b>DUŻY RUCH</b></p><ul class="news"><li><a href="https://finance.yahoo.com/markets/stocks/articles/global-payments-jumps-12-report-171318915.html?.tsrc=rss" target="_blank" rel="noopener">Global Payments jumps 12% on report of potential $40 billion buyout</a><small>17:13 UTC · deal</small></li><li><a href="https://finance.yahoo.com/markets/stocks/articles/5-financial-transaction-stocks-watch-165200091.html?.tsrc=rss" target="_blank" rel="noopener">5 Financial Transaction Stocks to Watch Amid Cost and Inflation Pressure</a><small>16:52 UTC · macro</small></li><li><a href="https://finance.yahoo.com/markets/stocks/articles/fiserv-set-report-q3-earnings-150100185.html?.tsrc=rss" target="_blank" rel="noopener">Fiserv Is Set to Report Q3 Earnings: Here&#x27;s What Investors Should Know</a><small>15:01 UTC · earnings</small></li><li><a href="https://finance.yahoo.com/markets/stocks/articles/corpay-gears-report-q3-earnings-144500116.html?.tsrc=rss" target="_blank" rel="noopener">Corpay Gears Up to Report Q3 Earnings: What&#x27;s in the Offing?</a><small>14:45 UTC · earnings</small></li></ul><details><summary>Pełne wyniki każdego kroku</summary><h4>Newsy</h4><pre>{
+  &quot;checked&quot;: &quot;2026-10-30T18:32:15.893677+00:00&quot;,
+  &quot;moves&quot;: [
+    {
+      &quot;ticker&quot;: &quot;GPN&quot;,
+      &quot;price&quot;: 95.28,
+      &quot;prev_close&quot;: 85.72,
+      &quot;pct&quot;: 11.15,
+      &quot;time&quot;: &quot;2026-10-30T18:28:56+00:00&quot;,
+      &quot;moving&quot;: true
+    }
+  ],
+  &quot;items&quot;: [
+    {
+      &quot;id&quot;: &quot;rss:f0cd9384-5030-3cf2-a5d5-99bfb52a30cb&quot;,
+      &quot;source&quot;: &quot;Yahoo Finance&quot;,
+      &quot;kind&quot;: &quot;headline&quot;,
+      &quot;ticker&quot;: &quot;GPN&quot;,
+      &quot;title&quot;: &quot;Global Payments jumps 12% on report of potential $40 billion buyout&quot;,
+      &quot;summary&quot;: &quot;Investing.com -- Global Payments shares jumped 12% Friday after a Financial Times report that private equity firm Clayton, Dubilier &amp; Rice is exploring a buyout of the payments processor, raising the prospect of a takeover premium after a prolonged decline in the stock.&quot;,
+      &quot;link&quot;: &quot;https://finance.yahoo.com/markets/stocks/articles/global-payments-jumps-12-report-171318915.html?.tsrc=rss&quot;,
+      &quot;time&quot;: &quot;2026-10-30T17:13:18+00:00&quot;,
+      &quot;touches&quot;: [
+        &quot;GPN&quot;
+      ],
+      &quot;tags&quot;: [
+        &quot;deal&quot;
+      ],
+      &quot;new&quot;: true
+    },
+    {
+      &quot;id&quot;: &quot;rss:ba411047-27c3-3423-aacb-6a41f49b9b63&quot;,
+      &quot;source&quot;: &quot;Yahoo Finance&quot;,
+      &quot;kind&quot;: &quot;headline&quot;,
+      &quot;ticker&quot;: &quot;GPN&quot;,
+      &quot;title&quot;: &quot;5 Financial Transaction Stocks to Watch Amid Cost and Inflation Pressure&quot;,
+      &quot;summary&quot;: &quot;Growing cross-border transactions, resilient consumer spending and strategic acquisitions support financial transaction stocks, while rising technology costs and inflation pose challenges. Companies like V, MA, PYPL, GPN and WEX are likely to navigate industry challenges.&quot;,
+      &quot;link&quot;: &quot;https://finance.yahoo.com/markets/stocks/articles/5-financial-transaction-stocks-watch-165200091.html?.tsrc=rss&quot;,
+      &quot;time&quot;: &quot;2026-10-30T16:52:00+00:00&quot;,
+      &quot;touches&quot;: [
+        &quot;GPN&quot;
+      ],
+      &quot;tags&quot;: [
+        &quot;macro&quot;
+      ],
+      &quot;new&quot;: true
+    },
+    {
+      &quot;id&quot;: &quot;rss:4d0e29ab-f919-3c80-a166-4f6d7a023601&quot;,
+      &quot;source&quot;: &quot;Yahoo Finance&quot;,
+      &quot;kind&quot;: &quot;headline&quot;,
+      &quot;ticker&quot;: &quot;GPN&quot;,
+      &quot;title&quot;: &quot;Fiserv Is Set to Report Q3 Earnings: Here&#x27;s What Investors Should Know&quot;,
+      &quot;summary&quot;: &quot;FISV is set to post challenging Q3&#x27;26 earnings results, with revenues falling 1.6% and EPS down 15.7%, amid segment weakness, rising costs and margin pressure.&quot;,
+      &quot;link&quot;: &quot;https://finance.yahoo.com/markets/stocks/articles/fiserv-set-report-q3-earnings-150100185.html?.tsrc=rss&quot;,
+      &quot;time&quot;: &quot;2026-10-30T15:01:00+00:00&quot;,
+      &quot;touches&quot;: [
+        &quot;GPN&quot;
+      ],
+      &quot;tags&quot;: [
+        &quot;earnings&quot;
+      ],
+      &quot;new&quot;: true
+    },
+    {
+      &quot;id&quot;: &quot;rss:27ffffb4-941f-36d1-91ec-9a7f2e1623dc&quot;,
+      &quot;source&quot;: &quot;Yahoo Finance&quot;,
+      &quot;kind&quot;: &quot;headline&quot;,
+      &quot;ticker&quot;: &quot;GPN&quot;,
+      &quot;title&quot;: &quot;Corpay Gears Up to Report Q3 Earnings: What&#x27;s in the Offing?&quot;,
+      &quot;summary&quot;: &quot;CPAY is set to post Q3&#x27;26 results, with revenues rising 16.1% and EPS growing 26% y/y, driven by strong corporate payments growth and operational gains.&quot;,
+      &quot;link&quot;: &quot;https://finance.yahoo.com/markets/stocks/articles/corpay-gears-report-q3-earnings-144500116.html?.tsrc=rss&quot;,
+      &quot;time&quot;: &quot;2026-10-30T14:45:00+00:00&quot;,
+      &quot;touches&quot;: [
+        &quot;GPN&quot;
+      ],
+      &quot;tags&quot;: [
+        &quot;earnings&quot;
+      ],
+      &quot;new&quot;: true
+    }
+  ],
+  &quot;notes&quot;: []
+}</pre><h4>Wejscie</h4><pre>GPN  Fri 2026-10-30 14:32 ET  opening-range breakout (15-minute range) on 5-minute bars (Yahoo, free, can lag), data to 14:28:57
+Opening range 9:30-9:45: high $87.00, low $85.60 (3 of 3 bars).
+TRIGGERED 12:00 PM at $87.06: the 11:55 bar (bar 29) closed above the range high $87.00 (+0.06%).
+That was 152 minutes ago; the last close is $95.61 (14:25 bar). A late entry is a different trade: the price, the stop distance and the odds have moved.
+Nothing was placed.
+Next: set the stop and target BEFORE you buy: /trader-exit (exit.py plan --from trader/entry.json).
+Wrote trader/entry.json (status triggered).</pre><h4>Stop i cel</h4><pre>Exit plan: GPN long, Fri 2026-10-30, opening-range breakout on 5-minute bars
+  Entry         $87.06 at 12:00 PM (bar 29)
+  Stop          $86.30  opening-range midpoint: ($87.00 + $85.60) / 2 = $86.3
+  Target        $88.58  2R (two times the risk)
+  Risk a share  $0.76 (0.87% of the entry)
+  Reward:risk   2.0
+  Flat by       15:55 ET, win or lose: no overnight hold
+Set before the entry. If price hits the stop, you are out; never move it further away.
+A stop is a plan, not a guarantee: a gap or a fast market can fill past it.
+Wrote trader/plan.json.
+Next: /trader-timemachine replays it, then /trader-budget sizes it to your max loss. Nothing was placed.</pre><h4>Wehikul czasu</h4><pre>GPN buy, Friday 2026-10-30: entry 87.06 at 12:00 PM (bar 29), stop 86.30, target 88.58 (2R, risk 0.76 a share).
+10,000 replays of the rest of the session, 12:00 PM to 3:55 PM (47 five-minute bars), seed 19.
+Each bar is drawn whole from GPN&#x27;s own 5-min bars at the same time of day (+-2 bars) over its last 59 full sessions (2026-08-07 to 2026-10-29).
+
+  target first   10.9 %
+  stop first     35.5 %
+  neither        53.5 %   still open at 3:55 PM
+  green          49.0 %   target first, or above the entry at 3:55 PM
+
+  Price at 3:55 PM: median 87.14, 90 % of replays between 85.69 and 88.66.
+  Average R: +0.088 (R = the 0.76 risk: +2R at the target, -1R at the stop).
+
+History: the same rule (15-min opening range, stop at the opening-range midpoint, 2R target) on each of those 59 real sessions fired 27 times: 5 target, 13 stop, 9 neither. Average R -0.027.
+
+Leans toward the stop: at 2R the target has to come first in 33 % of the replays that hit one side; it did in 23 % (target first 10.9 % vs stop first 35.5 %).
+53.5 % of the replays hit neither by 3:55 PM; the price at 3:55 PM decides those.
+Average R is +0.088 all the same: the replays that hit neither pull it the other way.
+
+A simulation built from GPN&#x27;s own last 59 full sessions. It is not a prediction: earnings, news and halts can do things those sessions never did. Same seed, same numbers. Repeat this run with --seed 19.
+Wrote trader/timemachine.json.
+Next: /trader-budget sizes it to your budget and your max loss per trade.</pre><h4>Swieza cena</h4><pre>GPN    $95.16 (+11.01% vs prev close $85.72)  2026-10-30T18:28:57Z  [yahoo]
+Wrote 1 price(s) to trader/prices.json.
+Quotes are free, delayed and unofficial: for alerts only. Your broker&#x27;s price is the one that fills.</pre><h4>Budzet</h4><pre>size.py: the target 88.58 is not above the entry 95.16: the move has already happened. Skip it or make a new plan with trader-exit</pre></details></article><article class="card"><header><h2>ACN</h2><span class="badge bad">STOP: Budżet odmówił zlecenia</span></header><p class="sub">Sygnał 11:30 AM po $256.03 · poziom $255.92</p><div class="grid"><div><span>Wejście</span><b>$256.03</b></div><div><span>Stop</span><b class="neg">$253.38</b></div><div><span>Cel (2.0R)</span><b class="pos">$261.33</b></div><div><span>Ryzyko / akcję</span><b>$2.65</b></div></div><h3>Symulacja: 10 000 powtórek dnia</h3><div class="bar"><i class="t" style="width:8.1%"></i><i class="s" style="width:36.7%"></i><i class="n" style="width:55.2%"></i></div><p class="legend"><span class="dot t"></span>cel 8.1% <span class="dot s"></span>stop 36.7% <span class="dot n"></span>żadne 55.2% · seed 19</p><p class="verdict">Strongly toward the stop: at 2R the target has to come first in 33 % of the replays that hit one side; it did in 18 % (target first 8.1 % vs stop first 36.7 %).</p><p class="risk bad">Powód: No order: reward:risk 0.72 (target 261.33, entry 258.00, stop 253.38) is under your minimum 1, so trader-risk would block it. No order. Skip it, or make a new plan with trader-exit.</p><h3>Newsy (24 h)</h3><p class="sub">Kurs $258.00 (+4.36% vs wczoraj) · <b>DUŻY RUCH</b></p><ul class="news"><li><a href="https://finance.yahoo.com/video/amazon-earnings-fall-short-amid-tech-sell-off-and-anthropic-becomes-spacexs-top-partner-174024326.html?.tsrc=rss" target="_blank" rel="noopener">Amazon earnings fall short amid tech sell-off, and Anthropic becomes SpaceX&#x27;s top partner</a><small>17:40 UTC · earnings, people, macro</small></li><li><a href="https://finance.yahoo.com/m/6843bed5-7ada-3649-a325-604d3d0e1f1e/intel%E2%80%99s-plunge-today-makes-it.html?.tsrc=rss" target="_blank" rel="noopener">Intel’s Plunge Today Makes It October’s Worst S&amp;P 500 Stock. Accenture Is the Month’s Big Winner.</a><small>16:43 UTC</small></li><li><a href="https://www.trefis.com/stock/acn/articles/621506/can-accenture-stock-rise-30-from-here/2026-10-30?.tsrc=rss" target="_blank" rel="noopener">Can Accenture Stock Rise 30% From Here?</a><small>12:32 UTC</small></li><li><a href="https://www.trefis.com/stock/ibm/articles/621534/what-could-lift-ibm-stock/2026-10-30?.tsrc=rss" target="_blank" rel="noopener">What Could Lift IBM Stock?</a><small>11:16 UTC</small></li><li><a href="https://www.trefis.com/stock/acn/articles/621274/what-needs-to-be-true-to-buy-accenture-stock-now/2026-10-29?.tsrc=rss" target="_blank" rel="noopener">What Needs To Be True To Buy Accenture Stock Now?</a><small>21:55 UTC</small></li></ul><details><summary>Pełne wyniki każdego kroku</summary><h4>Newsy</h4><pre>{
+  &quot;checked&quot;: &quot;2026-10-30T18:32:17.753921+00:00&quot;,
+  &quot;moves&quot;: [
+    {
+      &quot;ticker&quot;: &quot;ACN&quot;,
+      &quot;price&quot;: 258.0,
+      &quot;prev_close&quot;: 247.22,
+      &quot;pct&quot;: 4.36,
+      &quot;time&quot;: &quot;2026-10-30T18:29:08+00:00&quot;,
+      &quot;moving&quot;: true
+    }
+  ],
+  &quot;items&quot;: [
+    {
+      &quot;id&quot;: &quot;rss:472f6851-b77b-4a25-8301-5fb72867c696&quot;,
+      &quot;source&quot;: &quot;Yahoo Finance&quot;,
+      &quot;kind&quot;: &quot;headline&quot;,
+      &quot;ticker&quot;: &quot;ACN&quot;,
+      &quot;title&quot;: &quot;Amazon earnings fall short amid tech sell-off, and Anthropic becomes SpaceX&#x27;s top partner&quot;,
+      &quot;summary&quot;: &quot;In this episode of Market Hang, Laffer Tengler Investments CEO and CIO Nancy Tengler and her panel of experts weigh in on the latest round of disappointing earnings from Amazon (AMZN) and Intel (INTC), whether energy earnings feed into the inflation problem, and Anthropic (ANTH.PVT) passing the US government as SpaceX&#x27;s (SPCX) top partner. Today&#x27;s panel includes Futurum CEO Daniel Newman,  SHAKTI Partner Liz Harrow,  Kelly Intelligence Founder, CEO, and CCO  Kevin Kelly,  and &#x27;The Daily Wolf&#x27; Host Scott Melker.&quot;,
+      &quot;link&quot;: &quot;https://finance.yahoo.com/video/amazon-earnings-fall-short-amid-tech-sell-off-and-anthropic-becomes-spacexs-top-partner-174024326.html?.tsrc=rss&quot;,
+      &quot;time&quot;: &quot;2026-10-30T17:40:24+00:00&quot;,
+      &quot;touches&quot;: [
+        &quot;ACN&quot;
+      ],
+      &quot;tags&quot;: [
+        &quot;earnings&quot;,
+        &quot;people&quot;,
+        &quot;macro&quot;
+      ],
+      &quot;new&quot;: true
+    },
+    {
+      &quot;id&quot;: &quot;rss:6843bed5-7ada-3649-a325-604d3d0e1f1e&quot;,
+      &quot;source&quot;: &quot;Yahoo Finance&quot;,
+      &quot;kind&quot;: &quot;headline&quot;,
+      &quot;ticker&quot;: &quot;ACN&quot;,
+      &quot;title&quot;: &quot;Intel\u2019s Plunge Today Makes It October\u2019s Worst S&amp;P 500 Stock. Accenture Is the Month\u2019s Big Winner.&quot;,
+      &quot;summary&quot;: &quot;Intel is the worst stock in the S&amp;P 500 in October. The chip maker is heading for its worst month on record.&quot;,
+      &quot;link&quot;: &quot;https://finance.yahoo.com/m/6843bed5-7ada-3649-a325-604d3d0e1f1e/intel%E2%80%99s-plunge-today-makes-it.html?.tsrc=rss&quot;,
+      &quot;time&quot;: &quot;2026-10-30T16:43:00+00:00&quot;,
+      &quot;touches&quot;: [
+        &quot;ACN&quot;
+      ],
+      &quot;tags&quot;: [],
+      &quot;new&quot;: true
+    },
+    {
+      &quot;id&quot;: &quot;rss:83a70651-c5a5-34d7-82df-b0109794e54b&quot;,
+      &quot;source&quot;: &quot;Yahoo Finance&quot;,
+      &quot;kind&quot;: &quot;headline&quot;,
+      &quot;ticker&quot;: &quot;ACN&quot;,
+      &quot;title&quot;: &quot;Can Accenture Stock Rise 30% From Here?&quot;,
+      &quot;summary&quot;: &quot;For questions about this article or underlying research, email help@trefis.com.&quot;,
+      &quot;link&quot;: &quot;https://www.trefis.com/stock/acn/articles/621506/can-accenture-stock-rise-30-from-here/2026-10-30?.tsrc=rss&quot;,
+      &quot;time&quot;: &quot;2026-10-30T12:32:40+00:00&quot;,
+      &quot;touches&quot;: [
+        &quot;ACN&quot;
+      ],
+      &quot;tags&quot;: [],
+      &quot;new&quot;: true
+    },
+    {
+      &quot;id&quot;: &quot;rss:3616cc4f-eb96-33e0-ab09-914a0b8756d1&quot;,
+      &quot;source&quot;: &quot;Yahoo Finance&quot;,
+      &quot;kind&quot;: &quot;headline&quot;,
+      &quot;ticker&quot;: &quot;ACN&quot;,
+      &quot;title&quot;: &quot;What Could Lift IBM Stock?&quot;,
+      &quot;summary&quot;: &quot;For questions about this article or underlying research, email help@trefis.com.&quot;,
+      &quot;link&quot;: &quot;https://www.trefis.com/stock/ibm/articles/621534/what-could-lift-ibm-stock/2026-10-30?.tsrc=rss&quot;,
+      &quot;time&quot;: &quot;2026-10-30T11:16:04+00:00&quot;,
+      &quot;touches&quot;: [
+        &quot;ACN&quot;
+      ],
+      &quot;tags&quot;: [],
+      &quot;new&quot;: true
+    },
+    {
+      &quot;id&quot;: &quot;rss:f08d018f-74f6-3bd2-b4da-81ab83374bc9&quot;,
+      &quot;source&quot;: &quot;Yahoo Finance&quot;,
+      &quot;kind&quot;: &quot;headline&quot;,
+      &quot;ticker&quot;: &quot;ACN&quot;,
+      &quot;title&quot;: &quot;What Needs To Be True To Buy Accenture Stock Now?&quot;,
+      &quot;summary&quot;: &quot;For questions about this article or underlying research, email help@trefis.com.&quot;,
+      &quot;link&quot;: &quot;https://www.trefis.com/stock/acn/articles/621274/what-needs-to-be-true-to-buy-accenture-stock-now/2026-10-29?.tsrc=rss&quot;,
+      &quot;time&quot;: &quot;2026-10-29T21:55:08+00:00&quot;,
+      &quot;touches&quot;: [
+        &quot;ACN&quot;
+      ],
+      &quot;tags&quot;: [],
+      &quot;new&quot;: true
+    },
+    {
+      &quot;id&quot;: &quot;rss:2318932f-1ea7-3483-9dd4-132285174cba&quot;,
+      &quot;source&quot;: &quot;Yahoo Finance&quot;,
+      &quot;kind&quot;: &quot;headline&quot;,
+      &quot;ticker&quot;: &quot;ACN&quot;,
+      &quot;title&quot;: &quot;Accenture (ACN) Increases Despite Market Slip: Here&#x27;s What You Need to Know&quot;,
+      &quot;summary&quot;: &quot;Accenture (ACN) closed the most recent trading day at $247.22, moving +1.57% from the previous trading session.&quot;,
+      &quot;link&quot;: &quot;https://finance.yahoo.com/markets/stocks/articles/accenture-acn-increases-despite-market-205002098.html?.tsrc=rss&quot;,
+      &quot;time&quot;: &quot;2026-10-29T20:50:02+00:00&quot;,
+      &quot;touches&quot;: [
+        &quot;ACN&quot;
+      ],
+      &quot;tags&quot;: [],
+      &quot;new&quot;: true
+    }
+  ],
+  &quot;notes&quot;: []
+}</pre><h4>Wejscie</h4><pre>ACN  Fri 2026-10-30 14:32 ET  opening-range breakout (15-minute range) on 5-minute bars (Yahoo, free, can lag), data to 14:29:08
+Opening range 9:30-9:45: high $255.92, low $250.85 (3 of 3 bars).
+TRIGGERED 11:30 AM at $256.03: the 11:25 bar (bar 23) closed above the range high $255.92 (+0.04%).
+That was 182 minutes ago; the last close is $257.92 (14:25 bar). A late entry is a different trade: the price, the stop distance and the odds have moved.
+Nothing was placed.
+Next: set the stop and target BEFORE you buy: /trader-exit (exit.py plan --from trader/entry.json).
+Wrote trader/entry.json (status triggered).</pre><h4>Stop i cel</h4><pre>Exit plan: ACN long, Fri 2026-10-30, opening-range breakout on 5-minute bars
+  Entry         $256.03 at 11:30 AM (bar 23)
+  Stop          $253.38  opening-range midpoint: ($255.92 + $250.85) / 2 = $253.385, rounded down
+  Target        $261.33  2R (two times the risk)
+  Risk a share  $2.65 (1.04% of the entry)
+  Reward:risk   2.0
+  Flat by       15:55 ET, win or lose: no overnight hold
+Set before the entry. If price hits the stop, you are out; never move it further away.
+A stop is a plan, not a guarantee: a gap or a fast market can fill past it.
+Wrote trader/plan.json.
+Next: /trader-timemachine replays it, then /trader-budget sizes it to your max loss. Nothing was placed.</pre><h4>Wehikul czasu</h4><pre>ACN buy, Friday 2026-10-30: entry 256.03 at 11:30 AM (bar 23), stop 253.38, target 261.33 (2R, risk 2.65 a share).
+10,000 replays of the rest of the session, 11:30 AM to 3:55 PM (53 five-minute bars), seed 19.
+Each bar is drawn whole from ACN&#x27;s own 5-min bars at the same time of day (+-2 bars) over its last 59 full sessions (2026-08-07 to 2026-10-29).
+
+  target first   8.1 %
+  stop first     36.7 %
+  neither        55.2 %   still open at 3:55 PM
+  green          46.7 %   target first, or above the entry at 3:55 PM
+
+  Price at 3:55 PM: median 256.09, 90 % of replays between 251.23 and 261.08.
+  Average R: +0.018 (R = the 2.65 risk: +2R at the target, -1R at the stop).
+
+History: the same rule (15-min opening range, stop at the opening-range midpoint, 2R target) on each of those 59 real sessions fired 32 times: 6 target, 13 stop, 13 neither. Average R +0.054.
+
+Strongly toward the stop: at 2R the target has to come first in 33 % of the replays that hit one side; it did in 18 % (target first 8.1 % vs stop first 36.7 %).
+55.2 % of the replays hit neither by 3:55 PM; the price at 3:55 PM decides those.
+Average R is +0.018 all the same: the replays that hit neither pull it the other way.
+
+A simulation built from ACN&#x27;s own last 59 full sessions. It is not a prediction: earnings, news and halts can do things those sessions never did. Same seed, same numbers. Repeat this run with --seed 19.
+Wrote trader/timemachine.json.
+Next: /trader-budget sizes it to your budget and your max loss per trade.</pre><h4>Swieza cena</h4><pre>ACN    $258.00 (+4.36% vs prev close $247.22)  2026-10-30T18:29:08Z  [yahoo]
+Wrote 1 price(s) to trader/prices.json.
+Quotes are free, delayed and unofficial: for alerts only. Your broker&#x27;s price is the one that fills.</pre><h4>Budzet</h4><pre>ACN buy, opening-range breakout, entry 256.03 at 11:30 AM
+Stop 253.38: opening-range midpoint. Target 261.33: 2R (two times the risk).
+ACN last 258.00 (as of 14:29 New York) is above the plan&#x27;s entry 256.03, so the risk is bigger: sized at 258.00.
+Sized at 258.00 (the latest price, above the plan&#x27;s entry). Risk 4.62 a share (entry 258.00 minus stop 253.38). Reward:risk 0.72.
+
+Limits (whole shares; the smallest one wins):
+  max loss      $50 max loss / 4.62 risk a share                            10 shares
+  position cap  75% of $1,000 = $750 / 258.00                                2 shares  &lt;- binds
+  max order     $4,000 / 258.00                                             15 shares
+  cash          budget $1,000 minus the $100 cash buffer = $900 / 258.00     3 shares
+
+No order: reward:risk 0.72 (target 261.33, entry 258.00, stop 253.38) is under your minimum 1, so trader-risk would block it. No order. Skip it, or make a new plan with trader-exit.
+Education and tooling, not financial advice.</pre></details></article><footer>Limity: max strata $50.00 na transakcję, $100.00 dziennie, wejścia 09:45–15:30 NY, konto PAPER.<br>Wszystkie liczby liczą skrypty skilli (zwykły kod, bez AI). Dane Yahoo są darmowe i opóźnione. Narzędzie edukacyjne, nie porada inwestycyjna. Większość day traderów traci pieniądze.</footer>
+<script>try{document.getElementById('pl').textContent=new Date('2026-10-30T23:09:42Z').toLocaleTimeString('pl-PL',{hour:'2-digit',minute:'2-digit'})}catch(e){}</script>
+</body></html>
