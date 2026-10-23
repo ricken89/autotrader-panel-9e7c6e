@@ -1,0 +1,162 @@
+<!doctype html><html lang="pl"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta http-equiv="refresh" content="60"><meta name="robots" content="noindex">
+<meta name="apple-mobile-web-app-capable" content="yes"><meta name="theme-color" content="#0f172a">
+<title>AutoTrader</title><style>
+:root{--bg:#f6f7f9;--card:#fff;--fg:#111827;--mut:#6b7280;--line:#e5e7eb;--ok:#047857;--okbg:#d1fae5;--bad:#b91c1c;--badbg:#fee2e2;--t:#059669;--s:#dc2626;--n:#9ca3af}
+@media (prefers-color-scheme:dark){:root{--bg:#0b1220;--card:#131c2e;--fg:#e5e7eb;--mut:#94a3b8;--line:#1f2a40;--ok:#6ee7b7;--okbg:#064e3b;--bad:#fca5a5;--badbg:#7f1d1d;--t:#34d399;--s:#f87171;--n:#64748b}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.45 -apple-system,system-ui,Segoe UI,Roboto,sans-serif;padding:16px;max-width:720px;margin:auto}
+h1{margin:0 0 6px;font-size:24px}h2{margin:0;font-size:20px}h3{font-size:14px;margin:14px 0 6px;color:var(--mut);text-transform:uppercase;letter-spacing:.04em}h4{margin:10px 0 4px;font-size:13px}
+.top{margin-bottom:12px}.sub{color:var(--mut);margin:6px 0;font-size:14px}.note{color:var(--mut);font-size:14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;margin:12px 0}
+.card>header{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+.badge,.pill{font-size:12px;font-weight:600;padding:4px 10px;border-radius:999px;display:inline-block}
+.ok{background:var(--okbg);color:var(--ok)}.bad{background:var(--badbg);color:var(--bad)}.muted{background:var(--line);color:var(--mut)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}.grid div{background:var(--bg);border-radius:10px;padding:10px}
+.grid span{display:block;font-size:12px;color:var(--mut)}.grid b{font-size:18px}.pos{color:var(--t)}.neg{color:var(--s)}
+.bar{display:flex;height:12px;border-radius:6px;overflow:hidden;background:var(--line)}.bar i{display:block}
+.t{background:var(--t)}.s{background:var(--s)}.n{background:var(--n)}
+.legend{font-size:13px;color:var(--mut)}.dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin:0 3px 0 6px}
+.verdict{font-size:14px;border-left:3px solid var(--line);padding-left:10px}
+.ticket{background:var(--bg);border-radius:10px;padding:10px}.risk{border-radius:10px;padding:10px;font-size:14px}
+.news{padding-left:18px;margin:6px 0}.news li{margin:6px 0}.news a{color:inherit}.news small{display:block;color:var(--mut)}
+details{margin-top:12px}summary{cursor:pointer;color:var(--mut);font-size:14px}
+pre{white-space:pre-wrap;word-break:break-word;font-size:12px;background:var(--bg);padding:10px;border-radius:8px;overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:14px;margin-top:8px}td,th{text-align:left;padding:6px 4px;border-bottom:1px solid var(--line)}
+a.btn{display:block;text-align:center;margin-top:12px;padding:12px;border-radius:10px;background:var(--t);color:#fff;font-weight:600;text-decoration:none}
+a.btn.ghost{background:transparent;color:var(--s);border:1px solid var(--s)}
+footer{color:var(--mut);font-size:12px;margin:20px 0 40px}
+</style></head><body><header class="top"><h1>AutoTrader</h1><span class="pill muted">Giełda zamknięta · otwarcie 2026-11-09 09:30 NY</span><p class="sub">Ostatnia aktualizacja: 2026-11-07 11:22 czasu NY (<span id="pl"></span> w Polsce) · odświeża się co minutę</p></header><section class="card"><header><h2>Automat</h2><span class="badge ok">WŁĄCZONY · PAPER</span></header><p class="sub">Gdy kontrola ryzyka da PASS, serwer sam składa zlecenie ze stopem i celem (max 1 dziennie), a o 15:40 NY sam zamyka otwarte pozycje.</p><p class="sub">Dziś jeszcze nic nie zrobił.</p></section><section class="card"><header><h2>Dziennik wyników</h2><span class="badge muted">od 2026-10-23</span></header><div class="grid"><div><span>Transakcje</span><b>2</b></div><div><span>Trafione (zysk)</span><b>0 z 2 · 0%</b></div><div><span>Wynik łączny</span><b class="neg">−$5.37</b></div><div><span>Średnio na transakcję</span><b>-1.14 R</b></div></div><p class="sub">Cel 0 · stop 2 · zamknięte przed końcem 0 · otwarte 6. R = wynik w jednostkach ryzyka (+1 R = zysk równy zaplanowanej stracie). Ceny z historii wykonania w Alpaca.</p><p class="sub">Za mało transakcji na ocenę: potrzeba kilkudziesięciu (jest 2).</p><table><tr><th>Dzień</th><th>Spółka</th><th>Wejście → wyjście</th><th>Wynik</th></tr><tr><td>11-06</td><td>INTC<br><small>otwarta</small></td><td>$56.66 → …</td><td>otwarta</td></tr><tr><td>11-04</td><td>KO<br><small>otwarta</small></td><td>$96.25 → …</td><td>otwarta</td></tr><tr><td>11-03</td><td>NFLX<br><small>otwarta</small></td><td>$62.89 → …</td><td>otwarta</td></tr><tr><td>10-30</td><td>WMT<br><small>stop</small></td><td>$123.96 → $123.32</td><td class="neg">−$3.84<br><small>-1.03 R</small></td></tr><tr><td>10-29</td><td>LNG<br><small>otwarta</small></td><td>$317.23 → …</td><td>otwarta</td></tr><tr><td>10-28</td><td>IREN<br><small>otwarta</small></td><td>$28.32 → …</td><td>otwarta</td></tr><tr><td>10-27</td><td>LRCX<br><small>otwarta</small></td><td>$240.43 → …</td><td>otwarta</td></tr><tr><td>10-26</td><td>BA<br><small>stop</small></td><td>$188.58 → $188.07</td><td class="neg">−$1.53<br><small>-1.24 R</small></td></tr></table></section><section class="card"><header><h2>Konto Alpaca</h2><span class="badge muted">PAPER</span></header><div class="grid"><div><span>Kapitał</span><b>$99,618.88</b></div><div><span>Dziś</span><b class="pos">+$0.00</b></div><div><span>Gotówka</span><b>$95,800.18</b></div><div><span>Pozycje</span><b>6</b></div></div><table><tr><th>Spółka</th><th>Akcje</th><th>Śr. cena</th><th>Wynik</th></tr><tr><td>INTC</td><td>13</td><td>$56.66</td><td class="neg">$-4.95</td></tr><tr><td>IREN</td><td>26</td><td>$28.32</td><td class="neg">$-173.80</td></tr><tr><td>KO</td><td>7</td><td>$96.25</td><td class="neg">$-4.06</td></tr><tr><td>LNG</td><td>2</td><td>$317.23</td><td class="neg">$-78.56</td></tr><tr><td>LRCX</td><td>3</td><td>$240.43</td><td class="neg">$-119.98</td></tr><tr><td>NFLX</td><td>11</td><td>$62.89</td><td class="pos">$5.72</td></tr></table><a class="btn ghost" href="https://github.com/ricken89/autotrader/actions/workflows/zamknij.yml" target="_blank" rel="noopener">Zamknij pozycję</a><p class="sub">Otwarte zlecenia u brokera: 6 (stopy i cele pozycji).</p></section><p class="note">Najświeższe wybicia przeszły cały łańcuch skilli. Decyzja o zleceniu należy do Ciebie.</p><article class="card"><header><h2>AAPL</h2><span class="badge muted">CZEKA NA SYGNAŁ</span></header><p class="sub">no-data · poziom —</p><h3>Newsy (24 h)</h3><p class="sub">Kurs $342.37 (-0.52% vs wczoraj)</p><ul class="news"><li><a href="https://www.fool.com/coverage/better-buy/2026/11/07/booking-vs-doordash-does-going-out-or-staying-in-make-one-stock-a-better-buy-for-2027/?.tsrc=rss" target="_blank" rel="noopener">Booking vs. DoorDash: Does Going Out or Staying In Make One Stock a Better Buy for 2027?</a><small>14:27 UTC</small></li><li><a href="https://finance.yahoo.com/markets/stocks/articles/analysts-just-sounded-alarm-5-141904403.html?.tsrc=rss" target="_blank" rel="noopener">Analysts Just Sounded the Alarm on These 5 Overhyped Stocks</a><small>14:19 UTC</small></li><li><a href="https://247wallst.com/investing/2026/11/07/eric-balchunas-calls-it-a-five-alarm-fire-sell-off-heres-what-record-etf-trading-tells-you/?.tsrc=rss" target="_blank" rel="noopener">Eric Balchunas Calls It a “Five Alarm Fire” Sell-Off. Here’s What Record ETF Trading Tells You</a><small>14:17 UTC</small></li><li><a href="https://finance.yahoo.com/m/283e1bd9-349e-390b-a32b-b4ed9a9034f3/dow-jones-futures%3A-market.html?.tsrc=rss" target="_blank" rel="noopener">Dow Jones Futures: Market Needs Repair But Apple, Amazon, Microsoft Strong; Berkshire Earnings Fall</a><small>13:29 UTC · earnings, macro</small></li><li><a href="https://www.tikr.com/blog/alibaba-just-gained-12-in-a-week-as-the-nasdaq-fell-take-profits-or-buy-more?ref=yahoofinance&amp;tlnk=yf-261107-9466567f&amp;.tsrc=rss" target="_blank" rel="noopener">Alibaba Just Gained 12% in a Week as the Nasdaq Fell: Take Profits, or Buy More?</a><small>12:28 UTC</small></li></ul><details><summary>Pełne wyniki każdego kroku</summary><h4>Newsy</h4><pre>{
+  &quot;checked&quot;: &quot;2026-11-07T16:22:11.216909+00:00&quot;,
+  &quot;moves&quot;: [
+    {
+      &quot;ticker&quot;: &quot;AAPL&quot;,
+      &quot;price&quot;: 342.37,
+      &quot;prev_close&quot;: 344.17,
+      &quot;pct&quot;: -0.52,
+      &quot;time&quot;: &quot;2026-11-06T21:00:01+00:00&quot;,
+      &quot;moving&quot;: false
+    }
+  ],
+  &quot;items&quot;: [
+    {
+      &quot;id&quot;: &quot;rss:d8689de2-20dc-349d-ab40-138b5d6f7167&quot;,
+      &quot;source&quot;: &quot;Yahoo Finance&quot;,
+      &quot;kind&quot;: &quot;headline&quot;,
+      &quot;ticker&quot;: &quot;AAPL&quot;,
+      &quot;title&quot;: &quot;Booking vs. DoorDash: Does Going Out or Staying In Make One Stock a Better Buy for 2027?&quot;,
+      &quot;summary&quot;: &quot;Booking&#x27;s cash machine versus DoorDash&#x27;s rapid share gains set up a clear trade-off for 2027, with valuation tilting the scales in an unexpected direction.&quot;,
+      &quot;link&quot;: &quot;https://www.fool.com/coverage/better-buy/2026/11/07/booking-vs-doordash-does-going-out-or-staying-in-make-one-stock-a-better-buy-for-2027/?.tsrc=rss&quot;,
+      &quot;time&quot;: &quot;2026-11-07T14:27:01+00:00&quot;,
+      &quot;touches&quot;: [
+        &quot;AAPL&quot;
+      ],
+      &quot;tags&quot;: [],
+      &quot;new&quot;: true
+    },
+    {
+      &quot;id&quot;: &quot;rss:01554130-2834-3cde-9185-7b0e22b6d37b&quot;,
+      &quot;source&quot;: &quot;Yahoo Finance&quot;,
+      &quot;kind&quot;: &quot;headline&quot;,
+      &quot;ticker&quot;: &quot;AAPL&quot;,
+      &quot;title&quot;: &quot;Analysts Just Sounded the Alarm on These 5 Overhyped Stocks&quot;,
+      &quot;summary&quot;: &quot;Wall Street had a rough week, and the damage came fast. Thursday\u2019s sell-off erased $2.3 trillion in market value, pushed the Nasdaq into a correction and sent the VIX, the market\u2019s fear gauge, up 70% to 28, Yahoo Finance reported on November 6. A chip-sector index that plunged 12% on Thursday bounced 4% the next [\u2026]&quot;,
+      &quot;link&quot;: &quot;https://finance.yahoo.com/markets/stocks/articles/analysts-just-sounded-alarm-5-141904403.html?.tsrc=rss&quot;,
+      &quot;time&quot;: &quot;2026-11-07T14:19:04+00:00&quot;,
+      &quot;touches&quot;: [
+        &quot;AAPL&quot;
+      ],
+      &quot;tags&quot;: [],
+      &quot;new&quot;: true
+    },
+    {
+      &quot;id&quot;: &quot;rss:153dbc8b-9a19-3103-ad48-11372bda47b0&quot;,
+      &quot;source&quot;: &quot;Yahoo Finance&quot;,
+      &quot;kind&quot;: &quot;headline&quot;,
+      &quot;ticker&quot;: &quot;AAPL&quot;,
+      &quot;title&quot;: &quot;Eric Balchunas Calls It a \u201cFive Alarm Fire\u201d Sell-Off. Here\u2019s What Record ETF Trading Tells You&quot;,
+      &quot;summary&quot;: &quot;Two ETFs just shattered their own trading volume records in a single session, and one veteran analyst says the pattern is a fear signal Wall Street can&#x27;t hide. Why do big traders reach for these funds first when panic hits, and what should retirees do next?&quot;,
+      &quot;link&quot;: &quot;https://247wallst.com/investing/2026/11/07/eric-balchunas-calls-it-a-five-alarm-fire-sell-off-heres-what-record-etf-trading-tells-you/?.tsrc=rss&quot;,
+      &quot;time&quot;: &quot;2026-11-07T14:17:05+00:00&quot;,
+      &quot;touches&quot;: [
+        &quot;AAPL&quot;
+      ],
+      &quot;tags&quot;: [],
+      &quot;new&quot;: true
+    },
+    {
+      &quot;id&quot;: &quot;rss:283e1bd9-349e-390b-a32b-b4ed9a9034f3&quot;,
+      &quot;source&quot;: &quot;Yahoo Finance&quot;,
+      &quot;kind&quot;: &quot;headline&quot;,
+      &quot;ticker&quot;: &quot;AAPL&quot;,
+      &quot;title&quot;: &quot;Dow Jones Futures: Market Needs Repair But Apple, Amazon, Microsoft Strong; Berkshire Earnings Fall&quot;,
+      &quot;summary&quot;: &quot;The stock market needs repair while Sandisk and Micron seem broken. Apple, Amazon and Microsoft are holding up. Berkshire earnings fell.&quot;,
+      &quot;link&quot;: &quot;https://finance.yahoo.com/m/283e1bd9-349e-390b-a32b-b4ed9a9034f3/dow-jones-futures%3A-market.html?.tsrc=rss&quot;,
+      &quot;time&quot;: &quot;2026-11-07T13:29:30+00:00&quot;,
+      &quot;touches&quot;: [
+        &quot;AAPL&quot;
+      ],
+      &quot;tags&quot;: [
+        &quot;earnings&quot;,
+        &quot;macro&quot;
+      ],
+      &quot;new&quot;: true
+    },
+    {
+      &quot;id&quot;: &quot;rss:1ac20159-392e-36ec-a663-a1a1a1179659&quot;,
+      &quot;source&quot;: &quot;Yahoo Finance&quot;,
+      &quot;kind&quot;: &quot;headline&quot;,
+      &quot;ticker&quot;: &quot;AAPL&quot;,
+      &quot;title&quot;: &quot;Alibaba Just Gained 12% in a Week as the Nasdaq Fell: Take Profits, or Buy More?&quot;,
+      &quot;summary&quot;: &quot;Key TakeawaysAlibaba stock rose 12% in the past week after Apple picked Qwen for its China AI launch. Money also rotated out of US AI hardware into cheap Chinese internet stocks like Alibaba and Tencent.&quot;,
+      &quot;link&quot;: &quot;https://www.tikr.com/blog/alibaba-just-gained-12-in-a-week-as-the-nasdaq-fell-take-profits-or-buy-more?ref=yahoofinance&amp;tlnk=yf-261107-9466567f&amp;.tsrc=rss&quot;,
+      &quot;time&quot;: &quot;2026-11-07T12:28:46+00:00&quot;,
+      &quot;touches&quot;: [
+        &quot;AAPL&quot;
+      ],
+      &quot;tags&quot;: [],
+      &quot;new&quot;: true
+    },
+    {
+      &quot;id&quot;: &quot;rss:7e05d035-f064-3c95-8858-5e871b6a4eb3&quot;,
+      &quot;source&quot;: &quot;Yahoo Finance&quot;,
+      &quot;kind&quot;: &quot;headline&quot;,
+      &quot;ticker&quot;: &quot;AAPL&quot;,
+      &quot;title&quot;: &quot;Big Tech\u2019s $1 Trillion Rally Bets Regulation Won\u2019t Touch \u201cthe Profits of the Tech Companies\u201d&quot;,
+      &quot;summary&quot;: &quot;Key TakeawaysApple, Alphabet, Amazon, Microsoft and Meta were on pace to add nearly $1 trillion on Wednesday after Democrats won Congress. On Thursday, the four hyperscalers gave back 2% to 4%.&quot;,
+      &quot;link&quot;: &quot;https://www.tikr.com/blog/big-techs-1-trillion-rally-bets-regulation-wont-touch-the-profits-of-the-tech-companies?ref=yahoofinance&amp;tlnk=yf-261107-76c7gj42&amp;.tsrc=rss&quot;,
+      &quot;time&quot;: &quot;2026-11-07T10:51:17+00:00&quot;,
+      &quot;touches&quot;: [
+        &quot;AAPL&quot;
+      ],
+      &quot;tags&quot;: [],
+      &quot;new&quot;: true
+    },
+    {
+      &quot;id&quot;: &quot;rss:14783b96-9ebb-389e-86a4-480f4ab68516&quot;,
+      &quot;source&quot;: &quot;Yahoo Finance&quot;,
+      &quot;kind&quot;: &quot;headline&quot;,
+      &quot;ticker&quot;: &quot;AAPL&quot;,
+      &quot;title&quot;: &quot;These 4 Stocks Are Tied to the Smartphone in Your Pocket&quot;,
+      &quot;summary&quot;: &quot;Which of these four businesses is still earning more money from your phone?&quot;,
+      &quot;link&quot;: &quot;https://www.fool.com/investing/2026/11/07/these-4-stocks-are-tied-to-the-smartphone-in-your-pocket/?.tsrc=rss&quot;,
+      &quot;time&quot;: &quot;2026-11-07T10:13:02+00:00&quot;,
+      &quot;touches&quot;: [
+        &quot;AAPL&quot;
+      ],
+      &quot;tags&quot;: [],
+      &quot;new&quot;: true
+    },
+    {
+      &quot;id&quot;: &quot;rss:6d35815c-a7ba-3400-a4e1-581434913f6a&quot;,
+      &quot;source&quot;: &quot;Yahoo Finance&quot;,
+      &quot;kind&quot;: &quot;headline&quot;,
+      &quot;ticker&quot;: &quot;AAPL&quot;,
+      &quot;title&quot;: &quot;The S&amp;P 500 Is Up 75% In 3 Years. Priced In Gold, It Is Down 14%. Which Is Real?&quot;,
+      &quot;summary&quot;: &quot;Part of our series on building a mix that lasts. Start here: is 60/40 dead.&quot;,
+      &quot;link&quot;: &quot;https://www.trefis.com/stock/nvda/articles/623129/the-s-p-500-is-up-75-in-3-years-priced-in-gold-it-is-down-14-which-is-real/2026-11-07?.tsrc</pre><h4>Wejscie</h4><pre>AAPL  Sat 2026-11-07 11:22 ET  opening-range breakout (15-minute range) on 5-minute bars (Yahoo, free, can lag)
+MARKET CLOSED  the NYSE is closed today (weekend).
+Next open: 2026-11-09 09:30 New York.
+Wrote trader/entry.json (status no-data).</pre></details></article><footer>Limity: max strata $50.00 na transakcję, $100.00 dziennie, wejścia 09:45–15:30 NY, konto PAPER.<br>Wszystkie liczby liczą skrypty skilli (zwykły kod, bez AI). Dane Yahoo są darmowe i opóźnione. Narzędzie edukacyjne, nie porada inwestycyjna. Większość day traderów traci pieniądze.</footer>
+<script>try{document.getElementById('pl').textContent=new Date('2026-11-07T16:22:10Z').toLocaleTimeString('pl-PL',{hour:'2-digit',minute:'2-digit'})}catch(e){}</script>
+</body></html>
