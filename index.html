@@ -1,0 +1,326 @@
+<!doctype html><html lang="pl"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta http-equiv="refresh" content="60"><meta name="robots" content="noindex">
+<meta name="apple-mobile-web-app-capable" content="yes"><meta name="theme-color" content="#0f172a">
+<title>AutoTrader</title><style>
+:root{--bg:#f6f7f9;--card:#fff;--fg:#111827;--mut:#6b7280;--line:#e5e7eb;--ok:#047857;--okbg:#d1fae5;--bad:#b91c1c;--badbg:#fee2e2;--t:#059669;--s:#dc2626;--n:#9ca3af}
+@media (prefers-color-scheme:dark){:root{--bg:#0b1220;--card:#131c2e;--fg:#e5e7eb;--mut:#94a3b8;--line:#1f2a40;--ok:#6ee7b7;--okbg:#064e3b;--bad:#fca5a5;--badbg:#7f1d1d;--t:#34d399;--s:#f87171;--n:#64748b}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.45 -apple-system,system-ui,Segoe UI,Roboto,sans-serif;padding:16px;max-width:720px;margin:auto}
+h1{margin:0 0 6px;font-size:24px}h2{margin:0;font-size:20px}h3{font-size:14px;margin:14px 0 6px;color:var(--mut);text-transform:uppercase;letter-spacing:.04em}h4{margin:10px 0 4px;font-size:13px}
+.top{margin-bottom:12px}.sub{color:var(--mut);margin:6px 0;font-size:14px}.note{color:var(--mut);font-size:14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;margin:12px 0}
+.card>header{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+.badge,.pill{font-size:12px;font-weight:600;padding:4px 10px;border-radius:999px;display:inline-block}
+.ok{background:var(--okbg);color:var(--ok)}.bad{background:var(--badbg);color:var(--bad)}.muted{background:var(--line);color:var(--mut)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}.grid div{background:var(--bg);border-radius:10px;padding:10px}
+.grid span{display:block;font-size:12px;color:var(--mut)}.grid b{font-size:18px}.pos{color:var(--t)}.neg{color:var(--s)}
+.bar{display:flex;height:12px;border-radius:6px;overflow:hidden;background:var(--line)}.bar i{display:block}
+.t{background:var(--t)}.s{background:var(--s)}.n{background:var(--n)}
+.legend{font-size:13px;color:var(--mut)}.dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin:0 3px 0 6px}
+.verdict{font-size:14px;border-left:3px solid var(--line);padding-left:10px}
+.ticket{background:var(--bg);border-radius:10px;padding:10px}.risk{border-radius:10px;padding:10px;font-size:14px}
+.news{padding-left:18px;margin:6px 0}.news li{margin:6px 0}.news a{color:inherit}.news small{display:block;color:var(--mut)}
+details{margin-top:12px}summary{cursor:pointer;color:var(--mut);font-size:14px}
+pre{white-space:pre-wrap;word-break:break-word;font-size:12px;background:var(--bg);padding:10px;border-radius:8px;overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:14px;margin-top:8px}td,th{text-align:left;padding:6px 4px;border-bottom:1px solid var(--line)}
+a.btn{display:block;text-align:center;margin-top:12px;padding:12px;border-radius:10px;background:var(--t);color:#fff;font-weight:600;text-decoration:none}
+a.btn.ghost{background:transparent;color:var(--s);border:1px solid var(--s)}
+footer{color:var(--mut);font-size:12px;margin:20px 0 40px}
+</style></head><body><header class="top"><h1>AutoTrader</h1><span class="pill muted">Giełda zamknięta · otwarcie 2026-11-16 09:30 NY</span><p class="sub">Ostatnia aktualizacja: 2026-11-13 19:59 czasu NY (<span id="pl"></span> w Polsce) · odświeża się co minutę</p></header><p class="note">Poza sesją nic nie jest skanowane. Poniżej wynik ostatniego przebiegu.</p><section class="card"><header><h2>Automat</h2><span class="badge ok">WŁĄCZONY · PAPER</span></header><p class="sub">Gdy kontrola ryzyka da PASS, serwer sam składa zlecenie ze stopem i celem (max 1 dziennie), a o 15:40 NY sam zamyka otwarte pozycje.</p><ul class="news"><li>15:26 NY: UNH: WYSLANO na konto PAPER: kupno 1 akcji, market, stop 405.80, cel 413.45, max strata ok. $2.55. Status w Alpaca: pending_new.</li></ul></section><section class="card"><header><h2>Dziennik wyników</h2><span class="badge muted">od 2026-10-23</span></header><div class="grid"><div><span>Transakcje</span><b>9</b></div><div><span>Trafione (zysk)</span><b>1 z 9 · 11%</b></div><div><span>Wynik łączny</span><b class="neg">−$414.07</b></div><div><span>Średnio na transakcję</span><b>-4.67 R</b></div></div><p class="sub">Cel 0 · stop 3 · zamknięte przed końcem 6 · otwarte 1. R = wynik w jednostkach ryzyka (+1 R = zysk równy zaplanowanej stracie). Ceny z historii wykonania w Alpaca.</p><p class="sub">Za mało transakcji na ocenę: potrzeba kilkudziesięciu (jest 9).</p><table><tr><th>Dzień</th><th>Spółka</th><th>Wejście → wyjście</th><th>Wynik</th></tr><tr><td>11-13</td><td>UNH<br><small>otwarta</small></td><td>$408.39 → …</td><td>otwarta</td></tr><tr><td>11-10</td><td>V<br><small>stop</small></td><td>$423.05 → $419.67</td><td class="neg">−$3.38<br><small>-4.97 R</small></td></tr><tr><td>11-06</td><td>INTC<br><small>zamknięte przed końcem</small></td><td>$56.66 → $55.95</td><td class="neg">−$9.24<br><small>-0.66 R</small></td></tr><tr><td>11-04</td><td>KO<br><small>zamknięte przed końcem</small></td><td>$96.25 → $95.61</td><td class="neg">−$4.47<br><small>-0.77 R</small></td></tr><tr><td>11-03</td><td>NFLX<br><small>zamknięte przed końcem</small></td><td>$62.89 → $63.35</td><td class="pos">+$5.06<br><small>+1.24 R</small></td></tr><tr><td>10-30</td><td>WMT<br><small>stop</small></td><td>$123.96 → $123.32</td><td class="neg">−$3.84<br><small>-1.03 R</small></td></tr><tr><td>10-29</td><td>LNG<br><small>zamknięte przed końcem</small></td><td>$317.23 → $274.99</td><td class="neg">−$84.49<br><small>-8.86 R</small></td></tr><tr><td>10-28</td><td>IREN<br><small>zamknięte przed końcem</small></td><td>$28.32 → $20.45</td><td class="neg">−$204.68<br><small>-10.57 R</small></td></tr><tr><td>10-27</td><td>LRCX<br><small>zamknięte przed końcem</small></td><td>$240.43 → $204.60</td><td class="neg">−$107.50<br><small>-15.16 R</small></td></tr><tr><td>10-26</td><td>BA<br><small>stop</small></td><td>$188.58 → $188.07</td><td class="neg">−$1.53<br><small>-1.24 R</small></td></tr></table></section><section class="card"><header><h2>Konto Alpaca</h2><span class="badge muted">PAPER</span></header><div class="grid"><div><span>Kapitał</span><b>$99,584.60</b></div><div><span>Dziś</span><b class="neg">−$1.09</b></div><div><span>Gotówka</span><b>$99,177.30</b></div><div><span>Pozycje</span><b>1</b></div></div><table><tr><th>Spółka</th><th>Akcje</th><th>Śr. cena</th><th>Wynik</th></tr><tr><td>UNH</td><td>1</td><td>$408.39</td><td class="neg">$-1.09</td></tr></table><a class="btn ghost" href="https://github.com/ricken89/autotrader/actions/workflows/zamknij.yml" target="_blank" rel="noopener">Zamknij pozycję</a><p class="sub">Otwarte zlecenia u brokera: 1 (stopy, cele albo zlecenia zamknięcia czekające na otwarcie).</p></section><section class="card"><h2>Skaner</h2><p class="sub">38 wykresów przebiło zakres otwarcia (sprawdzono 749 z 5933, dane 2026-11-13 15:26 ET). Spełnienie reguły to nie rekomendacja kupna.</p><details><summary>Pokaż listę</summary><table><tr><th>Spółka</th><th>Wybicie</th><th>Cena</th><th>Nad</th></tr><tr><td>ABT</td><td>9:50 AM</td><td>$108.51</td><td>0.2%</td></tr><tr><td>ADBE</td><td>9:50 AM</td><td>$240.81</td><td>0.14%</td></tr><tr><td>CL</td><td>9:50 AM</td><td>$99.00</td><td>0.2%</td></tr><tr><td>COST</td><td>9:50 AM</td><td>$1,105.79</td><td>0.05%</td></tr><tr><td>DUK</td><td>9:50 AM</td><td>$128.79</td><td>0.16%</td></tr><tr><td>KMB</td><td>9:50 AM</td><td>$108.05</td><td>0.01%</td></tr><tr><td>MSFT</td><td>9:50 AM</td><td>$523.29</td><td>0.46%</td></tr><tr><td>SHOP</td><td>9:50 AM</td><td>$149.88</td><td>0.07%</td></tr><tr><td>WMT</td><td>9:50 AM</td><td>$128.14</td><td>0.36%</td></tr><tr><td>ACN</td><td>9:55 AM</td><td>$253.80</td><td>0.12%</td></tr><tr><td>APP</td><td>9:55 AM</td><td>$412.35</td><td>0.89%</td></tr><tr><td>EOG</td><td>9:55 AM</td><td>$157.73</td><td>0.14%</td></tr><tr><td>META</td><td>9:55 AM</td><td>$635.67</td><td>0.12%</td></tr><tr><td>MRNA</td><td>9:55 AM</td><td>$228.39</td><td>0.21%</td></tr><tr><td>ALNY</td><td>10:00 AM</td><td>$165.00</td><td>0.26%</td></tr><tr><td>MA</td><td>10:00 AM</td><td>$660.57</td><td>0.01%</td></tr><tr><td>ISRG</td><td>10:05 AM</td><td>$447.19</td><td>0.07%</td></tr><tr><td>COP</td><td>10:25 AM</td><td>$142.03</td><td>0.02%</td></tr><tr><td>UPS</td><td>10:25 AM</td><td>$111.92</td><td>0.1%</td></tr><tr><td>CME</td><td>10:30 AM</td><td>$318.61</td><td>0.13%</td></tr><tr><td>CB</td><td>10:35 AM</td><td>$376.96</td><td>0.12%</td></tr><tr><td>CVX</td><td>10:35 AM</td><td>$218.87</td><td>0.11%</td></tr><tr><td>KO</td><td>10:35 AM</td><td>$99.03</td><td>0.21%</td></tr><tr><td>MCK</td><td>10:35 AM</td><td>$1,093.62</td><td>0.35%</td></tr><tr><td>TDG</td><td>10:35 AM</td><td>$1,224.24</td><td>0.19%</td></tr><tr><td>GILD</td><td>10:40 AM</td><td>$168.96</td><td>0.22%</td></tr><tr><td>HD</td><td>10:40 AM</td><td>$347.47</td><td>0.32%</td></tr><tr><td>LLY</td><td>10:40 AM</td><td>$1,437.08</td><td>0.12%</td></tr><tr><td>SHW</td><td>10:40 AM</td><td>$353.08</td><td>0.26%</td></tr><tr><td>ABNB</td><td>12:05 PM</td><td>$186.12</td><td>0.06%</td></tr><tr><td>MELI</td><td>12:10 PM</td><td>$1,492.32</td><td>0.27%</td></tr><tr><td>SPOT</td><td>12:10 PM</td><td>$613.38</td><td>0.07%</td></tr><tr><td>IBM</td><td>1:00 PM</td><td>$247.18</td><td>0.0%</td></tr><tr><td>NOW</td><td>1:35 PM</td><td>$102.35</td><td>0.15%</td></tr><tr><td>MSTR</td><td>2:20 PM</td><td>$112.72</td><td>0.12%</td></tr><tr><td>HUM</td><td>2:30 PM</td><td>$447.43</td><td>0.1%</td></tr><tr><td>DHR</td><td>3:05 PM</td><td>$233.29</td><td>0.11%</td></tr><tr><td>UNH</td><td>3:20 PM</td><td>$408.35</td><td>0.09%</td></tr></table></details></section><p class="note">Najświeższe wybicia przeszły cały łańcuch skilli. Decyzja o zleceniu należy do Ciebie.</p><article class="card"><header><h2>UNH</h2><span class="badge ok">ZŁOŻONE AUTOMATYCZNIE</span></header><p class="sub">Sygnał 3:20 PM po $408.35 · poziom $408.00</p><div class="grid"><div><span>Wejście</span><b>$408.35</b></div><div><span>Stop</span><b class="neg">$405.80</b></div><div><span>Cel (2.0R)</span><b class="pos">$413.45</b></div><div><span>Ryzyko / akcję</span><b>$2.55</b></div></div><h3>Symulacja: 10 000 powtórek dnia</h3><div class="bar"><i class="t" style="width:0.1%"></i><i class="s" style="width:9.6%"></i><i class="n" style="width:90.3%"></i></div><p class="legend"><span class="dot t"></span>cel 0.1% <span class="dot s"></span>stop 9.6% <span class="dot n"></span>żadne 90.3% · seed 19</p><p class="verdict">Strongly toward the stop: at 2R the target has to come first in 33 % of the replays that hit one side; it did in 1 % (target first 0.1 % vs stop first 9.6 %).</p><h3>Zlecenie (konto PAPER, nie złożone)</h3><p class="ticket">KUP <b>1</b> UNH, stop 405.80, cel 413.45 · max strata $2.55</p><p class="risk ok">Ryzyko: <b>PASS</b></p><h3>Newsy (24 h)</h3><p class="sub">Kurs $408.32 (+0.79% vs wczoraj)</p><ul class="news"><li><a href="https://finance.yahoo.com/healthcare/articles/unhs-optum-rx-sustain-profit-171500204.html?.tsrc=rss" target="_blank" rel="noopener">Can UNH&#x27;s Optum Rx Sustain Profit Growth as Prescription Volumes Fall?</a><small>17:15 UTC · earnings</small></li><li><a href="https://finance.yahoo.com/healthcare/articles/state-street-health-care-spdr-110327637.html?.tsrc=rss" target="_blank" rel="noopener">State Street Health Care SPDR (XLV) Buys $66.8 Million More Eli Lilly on Nov. 11</a><small>11:03 UTC</small></li><li><a href="https://finance.yahoo.com/markets/stocks/articles/unitedhealth-unh-sees-86-8-110154220.html?.tsrc=rss" target="_blank" rel="noopener">UnitedHealth (UNH) Sees $86.8 Million in Net ETF Buying on Nov. 11</a><small>11:01 UTC</small></li></ul><p class="risk ok">Automat: WYSLANO na konto PAPER: kupno 1 akcji, market, stop 405.80, cel 413.45, max strata ok. $2.55. Status w Alpaca: pending_new.</p><details><summary>Pełne wyniki każdego kroku</summary><h4>Newsy</h4><pre>{
+  &quot;checked&quot;: &quot;2026-11-13T20:29:02.821879+00:00&quot;,
+  &quot;moves&quot;: [
+    {
+      &quot;ticker&quot;: &quot;UNH&quot;,
+      &quot;price&quot;: 408.32,
+      &quot;prev_close&quot;: 405.13,
+      &quot;pct&quot;: 0.79,
+      &quot;time&quot;: &quot;2026-11-13T20:28:54+00:00&quot;,
+      &quot;moving&quot;: false
+    }
+  ],
+  &quot;items&quot;: [
+    {
+      &quot;id&quot;: &quot;rss:d6336b1b-1cf0-3935-9567-ad2e2902ef7c&quot;,
+      &quot;source&quot;: &quot;Yahoo Finance&quot;,
+      &quot;kind&quot;: &quot;headline&quot;,
+      &quot;ticker&quot;: &quot;UNH&quot;,
+      &quot;title&quot;: &quot;Can UNH&#x27;s Optum Rx Sustain Profit Growth as Prescription Volumes Fall?&quot;,
+      &quot;summary&quot;: &quot;UnitedHealth&#x27;s Optum Rx posts 10.9% operating earnings growth despite falling prescriptions in Q3 2026. Can specialty pharmacy and efficiency gains sustain momentum?&quot;,
+      &quot;link&quot;: &quot;https://finance.yahoo.com/healthcare/articles/unhs-optum-rx-sustain-profit-171500204.html?.tsrc=rss&quot;,
+      &quot;time&quot;: &quot;2026-11-13T17:15:00+00:00&quot;,
+      &quot;touches&quot;: [
+        &quot;UNH&quot;
+      ],
+      &quot;tags&quot;: [
+        &quot;earnings&quot;
+      ],
+      &quot;new&quot;: true
+    },
+    {
+      &quot;id&quot;: &quot;rss:6a328193-5515-3543-b9e2-0d200fac3bc5&quot;,
+      &quot;source&quot;: &quot;Yahoo Finance&quot;,
+      &quot;kind&quot;: &quot;headline&quot;,
+      &quot;ticker&quot;: &quot;UNH&quot;,
+      &quot;title&quot;: &quot;State Street Health Care SPDR (XLV) Buys $66.8 Million More Eli Lilly on Nov. 11&quot;,
+      &quot;summary&quot;: &quot;The fund added $396.8 million across all 60 of its positions, led by a $66.8 million increase in Eli Lilly.&quot;,
+      &quot;link&quot;: &quot;https://finance.yahoo.com/healthcare/articles/state-street-health-care-spdr-110327637.html?.tsrc=rss&quot;,
+      &quot;time&quot;: &quot;2026-11-13T11:03:27+00:00&quot;,
+      &quot;touches&quot;: [
+        &quot;UNH&quot;
+      ],
+      &quot;tags&quot;: [],
+      &quot;new&quot;: true
+    },
+    {
+      &quot;id&quot;: &quot;rss:92a5b9e0-9c71-39f1-a947-56c13954380c&quot;,
+      &quot;source&quot;: &quot;Yahoo Finance&quot;,
+      &quot;kind&quot;: &quot;headline&quot;,
+      &quot;ticker&quot;: &quot;UNH&quot;,
+      &quot;title&quot;: &quot;UnitedHealth (UNH) Sees $86.8 Million in Net ETF Buying on Nov. 11&quot;,
+      &quot;summary&quot;: &quot;Fifty-one ETFs bought UnitedHealth stock while nine sold on Wednesday, Nov. 11.&quot;,
+      &quot;link&quot;: &quot;https://finance.yahoo.com/markets/stocks/articles/unitedhealth-unh-sees-86-8-110154220.html?.tsrc=rss&quot;,
+      &quot;time&quot;: &quot;2026-11-13T11:01:54+00:00&quot;,
+      &quot;touches&quot;: [
+        &quot;UNH&quot;
+      ],
+      &quot;tags&quot;: [],
+      &quot;new&quot;: true
+    }
+  ],
+  &quot;notes&quot;: []
+}</pre><h4>Wejscie</h4><pre>UNH  Fri 2026-11-13 15:29 ET  opening-range breakout (15-minute range) on 5-minute bars (Yahoo, free, can lag), data to 15:28:54
+Opening range 9:30-9:45: high $408.00, low $403.60 (3 of 3 bars).
+TRIGGERED 3:20 PM at $408.35: the 15:15 bar (bar 69) closed above the range high $408.00 (+0.09%).
+That was 9 minutes ago; the last close is $408.00 (15:20 bar). A late entry is a different trade: the price, the stop distance and the odds have moved.
+Nothing was placed.
+Next: set the stop and target BEFORE you buy: /trader-exit (exit.py plan --from trader/entry.json).
+Wrote trader/entry.json (status triggered).</pre><h4>Stop i cel</h4><pre>Exit plan: UNH long, Fri 2026-11-13, opening-range breakout on 5-minute bars
+  Entry         $408.35 at 3:20 PM (bar 69)
+  Stop          $405.80  opening-range midpoint: ($408.00 + $403.60) / 2 = $405.8
+  Target        $413.45  2R (two times the risk)
+  Risk a share  $2.55 (0.62% of the entry)
+  Reward:risk   2.0
+  Flat by       15:55 ET, win or lose: no overnight hold
+Set before the entry. If price hits the stop, you are out; never move it further away.
+A stop is a plan, not a guarantee: a gap or a fast market can fill past it.
+Wrote trader/plan.json.
+Next: /trader-timemachine replays it, then /trader-budget sizes it to your max loss. Nothing was placed.</pre><h4>Wehikul czasu</h4><pre>UNH buy, Friday 2026-11-13: entry 408.35 at 3:20 PM (bar 69), stop 405.80, target 413.45 (2R, risk 2.55 a share).
+10,000 replays of the rest of the session, 3:20 PM to 3:55 PM (7 five-minute bars), seed 19.
+Each bar is drawn whole from UNH&#x27;s own 5-min bars at the same time of day (+-2 bars) over its last 59 full sessions (2026-08-21 to 2026-11-12).
+
+  target first   0.1 %
+  stop first     9.6 %
+  neither        90.3 %   still open at 3:55 PM
+  green          51.2 %   target first, or above the entry at 3:55 PM
+
+  Price at 3:55 PM: median 408.39, 90 % of replays between 405.86 and 410.76.
+  Average R: +0.006 (R = the 2.55 risk: +2R at the target, -1R at the stop).
+
+History: the same rule (15-min opening range, stop at the opening-range midpoint, 2R target) on each of those 59 real sessions fired 31 times: 4 target, 17 stop, 10 neither. Average R -0.337.
+
+Strongly toward the stop: at 2R the target has to come first in 33 % of the replays that hit one side; it did in 1 % (target first 0.1 % vs stop first 9.6 %).
+90.3 % of the replays hit neither by 3:55 PM; the price at 3:55 PM decides those.
+Average R is +0.006 all the same: the replays that hit neither pull it the other way.
+
+A simulation built from UNH&#x27;s own last 59 full sessions. It is not a prediction: earnings, news and halts can do things those sessions never did. Same seed, same numbers. Repeat this run with --seed 19.
+Wrote trader/timemachine.json.
+Next: /trader-budget sizes it to your budget and your max loss per trade.</pre><h4>Swieza cena</h4><pre>UNH    $408.35 (+0.79% vs prev close $405.13)  2026-11-13T20:29:03Z  [yahoo]
+Wrote 1 price(s) to trader/prices.json.
+Quotes are free, delayed and unofficial: for alerts only. Your broker&#x27;s price is the one that fills.</pre><h4>Budzet</h4><pre>UNH buy, opening-range breakout, entry 408.35 at 3:20 PM
+Stop 405.80: opening-range midpoint. Target 413.45: 2R (two times the risk).
+Sized at 408.35 (the plan&#x27;s entry). Risk 2.55 a share (entry 408.35 minus stop 405.80). Reward:risk 2.00.
+
+Limits (whole shares; the smallest one wins):
+  max loss      $50 max loss / 2.55 risk a share                            19 shares
+  position cap  75% of $1,000 = $750 / 408.35                                1 shares  &lt;- binds
+  max order     $4,000 / 408.35                                              9 shares
+  cash          budget $1,000 minus the $100 cash buffer = $900 / 408.35     2 shares
+
+Size: 1 shares of UNH = $408.35 at 408.35. Max loss at the stop: 1 x 2.55 = $2.55.
+A stop is an order, not a promise: in a fast market it can fill below 405.80.
+
+Proposed bracket order (place_stock_order arguments, nothing has been placed):
+  buy 1 UNH, market, day, take-profit 413.45, stop-loss 405.80
+Flat by 15:55 New York: anything still open then gets closed (trader-alerts rings, trader-broker flatten).
+
+Next: trader-risk checks it, then trader-broker asks you yes or no.
+Education and tooling, not financial advice.
+Wrote 1 proposed bracket order to trader/orders.json</pre><h4>Ryzyko</h4><pre>PASS  #1 buy UNH 1 shares, entry
+          entry 408.35 (the plan&#x27;s entry), stop 405.80, target 413.45: risk 2.55 a share
+          max loss $2.55 (limit $50), reward:risk 2.00 (min 1)
+          today before this: 0 of 1 trades, $0 of $100 daily loss
+
+1 passed, 0 blocked at 2026-11-13 15:29 New York. Cash after the passed orders: $591.65 (paper account).
+Every order passed. trader-broker still asks you yes or no for each one.
+Education and tooling, not financial advice.</pre><h4>Bilet</h4><pre>ORDER 1 of 1, PAPER account, Alpaca
+  BUY 1 UNH, market, good until canceled
+  stop-loss 405.80
+  take-profit 413.45
+  max loss about $2.55 if the stop fills at 405.80 (it can fill worse in a fast market)
+  why: opening-range breakout on UNH: 1 shares, bound by your position cap (1 x 2.55 = $2.55 at the stop)
+  READY: trader-risk PASS, waiting for your yes
+  Claude will call place_stock_order with exactly:
+    {
+      &quot;symbol&quot;: &quot;UNH&quot;,
+      &quot;side&quot;: &quot;buy&quot;,
+      &quot;qty&quot;: &quot;1&quot;,
+      &quot;type&quot;: &quot;market&quot;,
+      &quot;time_in_force&quot;: &quot;gtc&quot;,
+      &quot;order_class&quot;: &quot;bracket&quot;,
+      &quot;take_profit_limit_price&quot;: &quot;413.45&quot;,
+      &quot;stop_loss_stop_price&quot;: &quot;405.80&quot;
+    }
+  Alpaca places the entry, then the stop-loss and the take-profit as two orders
+  that cancel each other: when one fills, the other is canceled.
+  Reply &quot;yes&quot; to place this one order, or &quot;no&quot; to skip it.
+  Claude&#x27;s own card then asks again: Allow once places it, Deny stops it.
+
+One order at a time: a yes covers one ticket, never the batch. Education and tooling, not financial advice.</pre></details></article><article class="card"><header><h2>DHR</h2><span class="badge bad">STOP: Ryzyko zablokowało zlecenie</span></header><p class="sub">Sygnał 3:05 PM po $233.29 · poziom $233.04</p><div class="grid"><div><span>Wejście</span><b>$233.29</b></div><div><span>Stop</span><b class="neg">$231.99</b></div><div><span>Cel (2.0R)</span><b class="pos">$235.89</b></div><div><span>Ryzyko / akcję</span><b>$1.30</b></div></div><h3>Symulacja: 10 000 powtórek dnia</h3><div class="bar"><i class="t" style="width:1.4%"></i><i class="s" style="width:18.3%"></i><i class="n" style="width:80.3%"></i></div><p class="legend"><span class="dot t"></span>cel 1.4% <span class="dot s"></span>stop 18.3% <span class="dot n"></span>żadne 80.3% · seed 19</p><p class="verdict">Strongly toward the stop: at 2R the target has to come first in 33 % of the replays that hit one side; it did in 7 % (target first 1.4 % vs stop first 18.3 %).</p><h3>Zlecenie (konto PAPER, nie złożone)</h3><p class="ticket">KUP <b>2</b> DHR, stop 231.99, cel 235.89 · max strata $2.70</p><p class="risk bad">Ryzyko: <b>BLOCK</b><br>· trades: 1 entries placed today plus 0 passed earlier in this batch, your limit is 1 a day</p><h3>Newsy (24 h)</h3><p class="sub">Kurs $233.34 (+0.51% vs wczoraj)</p><ul class="news"></ul><details><summary>Pełne wyniki każdego kroku</summary><h4>Newsy</h4><pre>{
+  &quot;checked&quot;: &quot;2026-11-13T20:29:05.895681+00:00&quot;,
+  &quot;moves&quot;: [
+    {
+      &quot;ticker&quot;: &quot;DHR&quot;,
+      &quot;price&quot;: 233.34,
+      &quot;prev_close&quot;: 232.16,
+      &quot;pct&quot;: 0.51,
+      &quot;time&quot;: &quot;2026-11-13T20:29:04+00:00&quot;,
+      &quot;moving&quot;: false
+    }
+  ],
+  &quot;items&quot;: [],
+  &quot;notes&quot;: []
+}</pre><h4>Wejscie</h4><pre>DHR  Fri 2026-11-13 15:29 ET  opening-range breakout (15-minute range) on 5-minute bars (Yahoo, free, can lag), data to 15:29:04
+Opening range 9:30-9:45: high $233.04, low $230.95 (3 of 3 bars).
+TRIGGERED 3:05 PM at $233.29: the 15:00 bar (bar 66) closed above the range high $233.04 (+0.11%).
+That was 24 minutes ago; the last close is $233.45 (15:20 bar). A late entry is a different trade: the price, the stop distance and the odds have moved.
+Nothing was placed.
+Next: set the stop and target BEFORE you buy: /trader-exit (exit.py plan --from trader/entry.json).
+Wrote trader/entry.json (status triggered).</pre><h4>Stop i cel</h4><pre>Exit plan: DHR long, Fri 2026-11-13, opening-range breakout on 5-minute bars
+  Entry         $233.29 at 3:05 PM (bar 66)
+  Stop          $231.99  opening-range midpoint: ($233.04 + $230.95) / 2 = $231.995, rounded down
+  Target        $235.89  2R (two times the risk)
+  Risk a share  $1.30 (0.56% of the entry)
+  Reward:risk   2.0
+  Flat by       15:55 ET, win or lose: no overnight hold
+Set before the entry. If price hits the stop, you are out; never move it further away.
+A stop is a plan, not a guarantee: a gap or a fast market can fill past it.
+Wrote trader/plan.json.
+Next: /trader-timemachine replays it, then /trader-budget sizes it to your max loss. Nothing was placed.</pre><h4>Wehikul czasu</h4><pre>DHR buy, Friday 2026-11-13: entry 233.29 at 3:05 PM (bar 66), stop 231.99, target 235.89 (2R, risk 1.30 a share).
+10,000 replays of the rest of the session, 3:05 PM to 3:55 PM (10 five-minute bars), seed 19.
+Each bar is drawn whole from DHR&#x27;s own 5-min bars at the same time of day (+-2 bars) over its last 59 full sessions (2026-08-21 to 2026-11-12).
+
+  target first   1.4 %
+  stop first     18.3 %
+  neither        80.3 %   still open at 3:55 PM
+  green          52.5 %   target first, or above the entry at 3:55 PM
+
+  Price at 3:55 PM: median 233.41, 90 % of replays between 231.70 and 235.07.
+  Average R: +0.054 (R = the 1.30 risk: +2R at the target, -1R at the stop).
+
+History: the same rule (15-min opening range, stop at the opening-range midpoint, 2R target) on each of those 59 real sessions fired 30 times: 6 target, 6 stop, 18 neither. Average R +0.280.
+
+Strongly toward the stop: at 2R the target has to come first in 33 % of the replays that hit one side; it did in 7 % (target first 1.4 % vs stop first 18.3 %).
+80.3 % of the replays hit neither by 3:55 PM; the price at 3:55 PM decides those.
+Average R is +0.054 all the same: the replays that hit neither pull it the other way.
+
+A simulation built from DHR&#x27;s own last 59 full sessions. It is not a prediction: earnings, news and halts can do things those sessions never did. Same seed, same numbers. Repeat this run with --seed 19.
+Wrote trader/timemachine.json.
+Next: /trader-budget sizes it to your budget and your max loss per trade.</pre><h4>Swieza cena</h4><pre>DHR    $233.34 (+0.51% vs prev close $232.16)  2026-11-13T20:29:04Z  [yahoo]
+Wrote 1 price(s) to trader/prices.json.
+Quotes are free, delayed and unofficial: for alerts only. Your broker&#x27;s price is the one that fills.</pre><h4>Budzet</h4><pre>DHR buy, opening-range breakout, entry 233.29 at 3:05 PM
+Stop 231.99: opening-range midpoint. Target 235.89: 2R (two times the risk).
+DHR last 233.34 (as of 15:29 New York) is above the plan&#x27;s entry 233.29, so the risk is bigger: sized at 233.34.
+Sized at 233.34 (the latest price, above the plan&#x27;s entry). Risk 1.35 a share (entry 233.34 minus stop 231.99). Reward:risk 1.89.
+
+Limits (whole shares; the smallest one wins):
+  max loss      $50 max loss / 1.35 risk a share                            37 shares
+  position cap  75% of $1,000 = $750 / 233.34                                3 shares
+  max order     $4,000 / 233.34                                             17 shares
+  cash          cash $591.61 in trader/portfolio.json minus the $100 buffer = $491.61 / 233.34   2 shares  &lt;- binds
+
+Size: 2 shares of DHR = $466.68 at 233.34. Max loss at the stop: 2 x 1.35 = $2.70.
+A stop is an order, not a promise: in a fast market it can fill below 231.99.
+
+Proposed bracket order (place_stock_order arguments, nothing has been placed):
+  buy 2 DHR, market, day, take-profit 235.89, stop-loss 231.99
+Flat by 15:55 New York: anything still open then gets closed (trader-alerts rings, trader-broker flatten).
+
+Next: trader-risk checks it, then trader-broker asks you yes or no.
+Education and tooling, not financial advice.
+Wrote 1 proposed bracket order to trader/orders.json</pre><h4>Ryzyko</h4><pre>WARNING: no price for UNH: valued at its cost basis $408.39
+
+BLOCK #1 buy DHR 2 shares, entry
+          entry 233.34 (the plan&#x27;s entry), stop 231.99, target 235.89: risk 1.35 a share
+          max loss $2.70 (limit $50), reward:risk 1.89 (min 1)
+          today before this: 1 of 1 trades, $2.55 of $100 daily loss
+        - trades: 1 entries placed today plus 0 passed earlier in this batch, your limit is 1 a day
+
+0 passed, 1 blocked at 2026-11-13 15:29 New York. Cash after the passed orders: $591.61 (paper account).
+Blocked orders do not go to the broker. Fix the order or your rules, then check again.
+Education and tooling, not financial advice.</pre></details></article><article class="card"><header><h2>HUM</h2><span class="badge bad">STOP: Budżet odmówił zlecenia</span></header><p class="sub">Sygnał 2:30 PM po $447.43 · poziom $446.99</p><div class="grid"><div><span>Wejście</span><b>$447.43</b></div><div><span>Stop</span><b class="neg">$444.00</b></div><div><span>Cel (2.0R)</span><b class="pos">$454.29</b></div><div><span>Ryzyko / akcję</span><b>$3.43</b></div></div><h3>Symulacja: 10 000 powtórek dnia</h3><div class="bar"><i class="t" style="width:7.0%"></i><i class="s" style="width:47.3%"></i><i class="n" style="width:45.7%"></i></div><p class="legend"><span class="dot t"></span>cel 7.0% <span class="dot s"></span>stop 47.3% <span class="dot n"></span>żadne 45.7% · seed 19</p><p class="verdict">Strongly toward the stop: at 2R the target has to come first in 33 % of the replays that hit one side; it did in 13 % (target first 7.0 % vs stop first 47.3 %).</p><p class="risk bad">Powód: No order: reward:risk 0.86 (target 454.29, entry 449.52, stop 444.00) is under your minimum 1, so trader-risk would block it. No order. Skip it, or make a new plan with trader-exit.</p><h3>Newsy (24 h)</h3><p class="sub">Kurs $449.51 (+1.32% vs wczoraj)</p><ul class="news"></ul><details><summary>Pełne wyniki każdego kroku</summary><h4>Newsy</h4><pre>{
+  &quot;checked&quot;: &quot;2026-11-13T20:29:07.256660+00:00&quot;,
+  &quot;moves&quot;: [
+    {
+      &quot;ticker&quot;: &quot;HUM&quot;,
+      &quot;price&quot;: 449.51,
+      &quot;prev_close&quot;: 443.68,
+      &quot;pct&quot;: 1.32,
+      &quot;time&quot;: &quot;2026-11-13T20:29:06+00:00&quot;,
+      &quot;moving&quot;: false
+    }
+  ],
+  &quot;items&quot;: [],
+  &quot;notes&quot;: []
+}</pre><h4>Wejscie</h4><pre>HUM  Fri 2026-11-13 15:29 ET  opening-range breakout (15-minute range) on 5-minute bars (Yahoo, free, can lag), data to 15:29:06
+Opening range 9:30-9:45: high $446.99, low $441.02 (3 of 3 bars).
+TRIGGERED 2:30 PM at $447.43: the 14:25 bar (bar 59) closed above the range high $446.99 (+0.10%).
+That was 59 minutes ago; the last close is $449.00 (15:20 bar). A late entry is a different trade: the price, the stop distance and the odds have moved.
+Nothing was placed.
+Next: set the stop and target BEFORE you buy: /trader-exit (exit.py plan --from trader/entry.json).
+Wrote trader/entry.json (status triggered).</pre><h4>Stop i cel</h4><pre>Exit plan: HUM long, Fri 2026-11-13, opening-range breakout on 5-minute bars
+  Entry         $447.43 at 2:30 PM (bar 59)
+  Stop          $444.00  opening-range midpoint: ($446.99 + $441.02) / 2 = $444.005, rounded down
+  Target        $454.29  2R (two times the risk)
+  Risk a share  $3.43 (0.77% of the entry)
+  Reward:risk   2.0
+  Flat by       15:55 ET, win or lose: no overnight hold
+Set before the entry. If price hits the stop, you are out; never move it further away.
+A stop is a plan, not a guarantee: a gap or a fast market can fill past it.
+Wrote trader/plan.json.
+Next: /trader-timemachine replays it, then /trader-budget sizes it to your max loss. Nothing was placed.</pre><h4>Wehikul czasu</h4><pre>HUM buy, Friday 2026-11-13: entry 447.43 at 2:30 PM (bar 59), stop 444.00, target 454.29 (2R, risk 3.43 a share).
+10,000 replays of the rest of the session, 2:30 PM to 3:55 PM (17 five-minute bars), seed 19.
+Each bar is drawn whole from HUM&#x27;s own 5-min bars at the same time of day (+-2 bars) over its last 46 full sessions (2026-08-21 to 2026-11-12).
+
+  target first   7.0 %
+  stop first     47.3 %
+  neither        45.7 %   still open at 3:55 PM
+  green          38.0 %   target first, or above the entry at 3:55 PM
+
+  Price at 3:55 PM: median 446.55, 90 % of replays between 439.39 and 453.46.
+  Average R: -0.170 (R = the 3.43 risk: +2R at the target, -1R at the stop).
+
+History: the same rule (15-min opening range, stop at the opening-range midpoint, 2R target) on each of those 46 real sessions fired 26 times: 5 target, 13 stop, 8 neither. Average R -0.072.
+
+Strongly toward the stop: at 2R the target has to come first in 33 % of the replays that hit one side; it did in 13 % (target first 7.0 % vs stop first 47.3 %).
+45.7 % of the replays hit neither by 3:55 PM; the price at 3:55 PM decides those.
+
+Left out 13 short session(s) (half days or gaps): 2026-08-28, 2026-08-31, 2026-09-02, 2026-09-10, 2026-09-11, 2026-09-14, 2026-09-30, 2026-10-02, 2026-10-21, 2026-10-22, 2026-10-27, 2026-10-28, 2026-10-30.
+A simulation built from HUM&#x27;s own last 46 full sessions. It is not a prediction: earnings, news and halts can do things those sessions never did. Same seed, same numbers. Repeat this run with --seed 19.
+Wrote trader/timemachine.json.
+Next: /trader-budget sizes it to your budget and your max loss per trade.</pre><h4>Swieza cena</h4><pre>HUM    $449.51 (+1.32% vs prev close $443.68)  2026-11-13T20:29:06Z  [yahoo]
+Wrote 1 price(s) to trader/prices.json.
+Quotes are free, delayed and unofficial: for alerts only. Your broker&#x27;s price is the one that fills.</pre><h4>Budzet</h4><pre>HUM buy, opening-range breakout, entry 447.43 at 2:30 PM
+Stop 444.00: opening-range midpoint. Target 454.29: 2R (two times the risk).
+HUM last 449.52 (as of 15:29 New York) is above the plan&#x27;s entry 447.43, so the risk is bigger: sized at 449.52.
+Sized at 449.52 (the latest price, above the plan&#x27;s entry). Risk 5.52 a share (entry 449.52 minus stop 444.00). Reward:risk 0.86.
+
+Limits (whole shares; the smallest one wins):
+  max loss      $50 max loss / 5.52 risk a share                             9 shares
+  position cap  75% of $1,000 = $750 / 449.52                                1 shares  &lt;- binds
+  max order     $4,000 / 449.52                                              8 shares
+  cash          cash $591.61 in trader/portfolio.json minus the $100 buffer = $491.61 / 449.52   1 shares
+
+No order: reward:risk 0.86 (target 454.29, entry 449.52, stop 444.00) is under your minimum 1, so trader-risk would block it. No order. Skip it, or make a new plan with trader-exit.
+Education and tooling, not financial advice.</pre></details></article><footer>Limity: max strata $50.00 na transakcję, $100.00 dziennie, wejścia 09:45–15:30 NY, konto PAPER.<br>Wszystkie liczby liczą skrypty skilli (zwykły kod, bez AI). Dane Yahoo są darmowe i opóźnione. Narzędzie edukacyjne, nie porada inwestycyjna. Większość day traderów traci pieniądze.</footer>
+<script>try{document.getElementById('pl').textContent=new Date('2026-11-14T00:59:34Z').toLocaleTimeString('pl-PL',{hour:'2-digit',minute:'2-digit'})}catch(e){}</script>
+</body></html>
